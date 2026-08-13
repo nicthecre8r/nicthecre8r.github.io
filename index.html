@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Nicholas Gray — UX Designer</title>
+<meta name="description" content="UX designer focused on enterprise products, AI-assisted workflows, and scalable design systems.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ==================== SITE HEADER (same on every page) ==================== -->
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html" aria-label="Nicholas Gray — home">
+      <span class="mark" aria-hidden="true">NG</span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      Menu
+    </button>
+
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul class="nav-list">
+        <li><a href="work.html" data-nav-link>Work</a></li>
+        <li><a href="ask.html" data-nav-link>Ask</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============================ HERO ============================ -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+
+      <div class="hero-figure">
+        <img
+          class="hero-watermark"
+          src="images/hero-bg-1000.png"
+          srcset="images/hero-bg-360.png 360w, images/hero-bg-480.png 480w, images/hero-bg-640.png 640w, images/hero-bg-800.png 800w, images/hero-bg-1000.png 1000w"
+          sizes="(max-width: 899px) 320px, 520px"
+          alt="" aria-hidden="true">
+      </div>
+
+      <div class="hero-copy">
+        <p class="eyebrow">Behind the mark</p>
+        <h1 class="hero-title">I design systems and experiences that help turn complexity into clarity.</h1>
+        <p class="lede">UX designer focused on enterprise products, AI-assisted workflows, and scalable design systems.</p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="work.html">View work</a>
+          <a class="btn btn-secondary" href="ask.html">Let's talk</a>
+        </div>
+
+        <ul class="facts">
+          <li>8+ years experience</li>
+          <li>25+ product initiatives</li>
+          <li>Millions of members &amp; clinicians supported</li>
+          <li>Enterprise healthcare + AI</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================ BELIEF STATEMENT ============================ -->
+  <section class="section">
+    <div class="wrap reveal">
+      <h2 class="statement-title">As a designer, I believe I align perspectives to create better outcomes.</h2>
+      <p class="statement-body">I bridge people, technology, and business goals by turning complexity into meaningful, human-centred experiences.</p>
+    </div>
+  </section>
+
+  <!-- ============================ FEATURED WORK ============================ -->
+  <section class="section featured">
+    <div class="wrap">
+      <p class="eyebrow reveal">Featured work</p>
+
+      <article class="project reveal">
+        <h2 class="project-title">Provider Data Central</h2>
+        <p class="project-kind">Enterprise onboarding platform</p>
+        <p class="project-desc">Designed cross-system workflows for provider onboarding.</p>
+        <a class="btn btn-secondary" href="work.html#case/provider-data-central">View case study</a>
+      </article>
+
+      <article class="project reveal">
+        <h2 class="project-title">OnboardIQ</h2>
+        <p class="project-kind">Agentic onboarding workspace</p>
+        <p class="project-desc">An AI-assisted review experience for human-in-the-loop decision support.</p>
+        <a class="btn btn-secondary" href="work.html#case/onboardiq">View case study</a>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============================ SELECTED DISCIPLINES ============================ -->
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow reveal">Selected disciplines</p>
+      <ul class="discipline-grid reveal">
+        <li class="discipline">Experience design</li>
+        <li class="discipline">Design systems</li>
+        <li class="discipline">Product strategy</li>
+        <li class="discipline">AI-assisted workflows</li>
+        <li class="discipline">Front-end expertise</li>
+        <li class="discipline">Accessibility analysis</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================ ABOUT ============================ -->
+  <section class="section">
+    <div class="wrap reveal">
+      <h2 class="statement-title">Am I just a designer?</h2>
+      <p class="statement-body">No. Outside work it's photography, visual art, music, skateboarding, and a mean cinnamon granola. When I don't know a subject, I read into it far enough to be dangerous — or at least to argue about it properly.</p>
+    </div>
+  </section>
+
+  <!-- ============================ CLOSING CTA ============================ -->
+  <section class="closing">
+    <div class="wrap reveal">
+      <a class="btn btn-primary btn-lg" href="ask.html">Ask me!</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ==================== FOOTER (same on every page) ==================== -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p>Nicholas Gray · Updated [MONTH YEAR]</p>
+    <ul class="footer-links">
+      <li><a href="mailto:[YOUR@EMAIL.COM]">Email</a></li>
+      <li><a href="[LINKEDIN URL]">LinkedIn</a></li>
+      <li><a href="[RESUME.PDF]">Résumé</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

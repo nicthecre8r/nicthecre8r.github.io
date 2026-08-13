@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Work — Nicholas Gray</title>
+<meta name="description" content="A curated list of UX projects and experiments by Nicholas Gray.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ==================== SITE HEADER (same on every page) ==================== -->
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html" aria-label="Nicholas Gray — home">
+      <span class="mark" aria-hidden="true">NG</span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      Menu
+    </button>
+
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul class="nav-list">
+        <li><a href="work.html" data-nav-link aria-current="page">Work</a></li>
+        <li><a href="ask.html" data-nav-link>Ask</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============================ PAGE HEAD ============================
+       The two filter buttons switch between categories. To add a third
+       category, copy a filter button and give it a new data-filter value,
+       then tag projects with the matching data-category.
+       ================================================================= -->
+  <div class="page-head">
+    <div class="wrap reveal">
+      <h1 class="page-title" id="work">Work</h1>
+      <p class="subtitle">Curated list of projects</p>
+
+      <div class="filter" role="group" aria-label="Filter projects">
+        <button class="filter-btn" type="button" data-filter="ux" aria-pressed="true">UX Design</button>
+        <button class="filter-btn" type="button" data-filter="experiments" aria-pressed="false">Experiments</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================ PROJECT LIST ============================
+       EDIT: one <article class="project"> per project. Things to change:
+         1. data-category — "ux" or "experiments"
+         2. data-slug — unique, kebab-case; used by the case-study URL
+         3. title, kind, description, Role/Year, outcome
+         4. if you write a full case study for it, add data-case="<id>"
+            pointing at a matching <template id="case-<id>"> below
+       ===================================================================== -->
+  <div class="wrap project-list" id="projects">
+
+    <article class="project reveal" data-category="ux" data-slug="provider-data-central">
+      <h2 class="project-title">Provider Data Central</h2>
+      <p class="project-kind">Enterprise onboarding platform</p>
+      <p class="project-desc">Designed cross-system workflows for provider onboarding.</p>
+      <p class="project-meta">Lead UX Designer, 2025</p>
+      <p class="project-outcome">Onboarding cycle time down <strong>[XX%]</strong></p>
+      <button class="btn btn-secondary" type="button" data-open-case>Open<span class="visually-hidden"> — Provider Data Central</span></button>
+    </article>
+
+    <article class="project reveal" data-category="ux" data-slug="onboardiq">
+      <h2 class="project-title">OnboardIQ</h2>
+      <p class="project-kind">Agentic onboarding workspace</p>
+      <p class="project-desc">An AI-assisted review experience for human-in-the-loop decision support.</p>
+      <p class="project-meta">Lead UX Designer, 2025</p>
+      <p class="project-outcome">Review time per case down <strong>[XX%]</strong></p>
+      <button class="btn btn-secondary" type="button" data-open-case>Open<span class="visually-hidden"> — OnboardIQ</span></button>
+    </article>
+
+    <article class="project reveal" data-category="ux" data-slug="fee-schedule-hub" data-case="fee-schedule-hub">
+      <h2 class="project-title">Fee Schedule Hub</h2>
+      <p class="project-kind">AI-assisted fee schedule management platform</p>
+      <p class="project-desc">Centralized a spreadsheet- and email-driven workflow into a searchable, AI-assisted platform.</p>
+      <p class="project-meta">UX Engineer, 2026</p>
+      <p class="project-outcome">Reached UAT across search, create/edit/deactivate, tracking &amp; approvals</p>
+      <button class="btn btn-secondary" type="button" data-open-case>Open<span class="visually-hidden"> — Fee Schedule Hub</span></button>
+    </article>
+
+    <article class="project reveal" data-category="ux" data-slug="care-pathways" data-case="care-pathways">
+      <h2 class="project-title">Care Pathways</h2>
+      <p class="project-kind">Guided care navigation — mobile &amp; web</p>
+      <p class="project-desc">Turned fragmented health, benefits, and program content into guided, personalized care journeys.</p>
+      <p class="project-meta">Lead Designer, 2024–2025</p>
+      <p class="project-outcome">Repeat calls down <strong>16.0%</strong>, accepted personalized offers up <strong>10.5%</strong></p>
+      <button class="btn btn-secondary" type="button" data-open-case>Open<span class="visually-hidden"> — Care Pathways</span></button>
+    </article>
+
+    <article class="project reveal" data-category="ux" data-slug="next-project">
+      <h2 class="project-title">[PROJECT TITLE]</h2>
+      <p class="project-kind">[CATEGORY OR PRODUCT TYPE]</p>
+      <p class="project-desc">[ONE SENTENCE, UNDER 110 CHARACTERS.]</p>
+      <p class="project-meta">[ROLE], [YEAR]</p>
+      <p class="project-outcome">[OUTCOME — a number or a clear change]</p>
+      <button class="btn btn-secondary" type="button" data-open-case>Open<span class="visually-hidden"> — [PROJECT TITLE]</span></button>
+    </article>
+
+    <article class="project reveal" data-category="experiments" data-slug="experiment-one" hidden>
+      <h2 class="project-title">[EXPERIMENT TITLE]</h2>
+      <p class="project-kind">[PROTOTYPE / SIDE PROJECT / TOOL]</p>
+      <p class="project-desc">[WHAT YOU BUILT AND WHAT YOU WERE TESTING.]</p>
+      <p class="project-meta">Solo, [YEAR]</p>
+      <p class="project-outcome">[WHAT YOU LEARNED]</p>
+      <button class="btn btn-secondary" type="button" data-open-case>Open<span class="visually-hidden"> — [EXPERIMENT TITLE]</span></button>
+    </article>
+
+    <article class="project reveal" data-category="experiments" data-slug="experiment-two" hidden>
+      <h2 class="project-title">[EXPERIMENT TITLE]</h2>
+      <p class="project-kind">[PROTOTYPE / SIDE PROJECT / TOOL]</p>
+      <p class="project-desc">[WHAT YOU BUILT AND WHAT YOU WERE TESTING.]</p>
+      <p class="project-meta">Solo, [YEAR]</p>
+      <p class="project-outcome">[WHAT YOU LEARNED]</p>
+      <button class="btn btn-secondary" type="button" data-open-case>Open<span class="visually-hidden"> — [EXPERIMENT TITLE]</span></button>
+    </article>
+
+  </div>
+
+  <!-- ============================== CLOSING BAND ============================== -->
+  <section class="band reveal">
+    <div class="wrap">
+      <p class="eyebrow eyebrow-invert">Ask</p>
+      <h2 class="band-title">Curious about any of these?</h2>
+      <p class="band-body">Happy to walk through the parts that didn't make the page — the dead ends especially.</p>
+      <div class="band-actions">
+        <a class="btn btn-primary" href="mailto:[YOUR@EMAIL.COM]">Email me</a>
+        <button class="btn btn-ghost" type="button" data-copy="[YOUR@EMAIL.COM]">Copy address</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ==================== CASE STUDY PAGE ====================
+     Shared template — every project's "Open" control swaps the visible
+     page for this view (main is hidden, this is shown), populated from
+     that project's own card. Fill in the bracketed copy per project when
+     you're ready — see README notes.
+     ============================================================ -->
+<div class="case-page" id="case-page" hidden>
+  <div class="case-head">
+  <div class="wrap">
+    <a class="back-link" href="#work" id="case-back">← All work</a>
+
+    <div id="modal-case-content">
+      <p class="eyebrow" id="modal-eyebrow">Case study</p>
+      <h1 class="case-title" id="modal-title">Project title</h1>
+      <p class="case-summary" id="modal-summary">Summary.</p>
+
+      <dl class="facts-grid">
+        <div><dt>Role</dt><dd>Lead UX Designer — discovery through delivery</dd></div>
+        <div><dt>Timeframe</dt><dd>[MONTH]–[MONTH] [YEAR] ([N] months)</dd></div>
+        <div><dt>Team &amp; collaborators</dt><dd>[1 PM, N engineers, researcher, SMEs]</dd></div>
+        <div><dt>Tools &amp; methods</dt><dd>[Service blueprint, Figma, usability testing, design tokens]</dd></div>
+      </dl>
+
+      <div class="case-body">
+        <section class="case-section">
+          <h2>Overview</h2>
+          <p>[INSERT: what the product does, who uses it, and what you were brought in to change.]</p>
+        </section>
+
+        <section class="case-section">
+          <h2>Context &amp; constraints</h2>
+          <p>[INSERT: the business situation, plus the constraints that shaped the work. Naming real constraints is what makes a case study credible.]</p>
+          <ul class="case-list">
+            <li>[CONSTRAINT — e.g. legacy data model, frozen for the first year]</li>
+            <li>[CONSTRAINT — e.g. no training budget; users switch mid-shift]</li>
+            <li>[CONSTRAINT — e.g. regulatory review on every state change]</li>
+          </ul>
+        </section>
+
+        <section class="case-section">
+          <h2>My role &amp; collaborators</h2>
+          <p>[INSERT: what you personally did, and what others did. Being specific about shared credit reads as more senior, not less.]</p>
+        </section>
+
+        <section class="case-section">
+          <h2>Research &amp; insights</h2>
+          <h3>What we did</h3>
+          <ul class="case-list">
+            <li>[METHOD, sample size, where]</li>
+            <li>[METHOD, sample size, where]</li>
+          </ul>
+          <h3>What changed our minds</h3>
+          <ul class="case-list">
+            <li>[INSIGHT — and the design decision it overturned]</li>
+            <li>[INSIGHT — and the design decision it overturned]</li>
+          </ul>
+          <blockquote class="case-quote">
+            <p>[SHORT QUOTE FROM A REAL PARTICIPANT.]</p>
+            <cite>[WHO THEY ARE, WITHOUT NAMING THEM]</cite>
+          </blockquote>
+        </section>
+
+        <section class="case-section">
+          <h2>Design exploration &amp; rationale</h2>
+          <p>[INSERT: the directions you considered and why you chose one. Include at least one you rejected — that's where the thinking shows.]</p>
+          <figure class="case-figure">
+            <div class="case-figure-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 15l-5-5-8 8"/></svg>
+              <span class="visually-hidden">Add a screenshot for this section</span>
+            </div>
+            <figcaption>[CAPTION: what to notice, and what it led to.]</figcaption>
+          </figure>
+        </section>
+
+        <section class="case-section">
+          <h2>Prototyping &amp; testing</h2>
+          <ul class="case-list">
+            <li><strong>[Round 1 — fidelity, participants]:</strong> [what failed, what you changed]</li>
+            <li><strong>[Round 2 — fidelity, participants]:</strong> [what failed, what you changed]</li>
+            <li><strong>[Pilot]:</strong> [result]</li>
+          </ul>
+        </section>
+
+        <section class="case-section">
+          <h2>Outcomes &amp; impact</h2>
+          <p>[INSERT: how these were measured, and over what period. If you can't share exact figures, use direction and a range.]</p>
+          <ul class="outcome-list" id="modal-outcomes">
+            <li>[XX%] faster onboarding cycle time<span>[How it was measured, and over what period]</span></li>
+            <li>[XX%] fewer handoffs between teams<span>[How it was measured]</span></li>
+            <li>[YOUR THIRD METRIC — adoption, error rate, SUS, revenue]<span>[How it was measured]</span></li>
+          </ul>
+          <p>[INSERT: the qualitative impact — what the team or org does differently now.]</p>
+        </section>
+
+        <section class="case-section">
+          <h2>Learnings &amp; reflections</h2>
+          <p>[INSERT: what you'd do differently, and what you carried into the next project. One honest regret is worth more than three wins.]</p>
+        </section>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <section class="band">
+    <div class="wrap">
+      <p class="eyebrow eyebrow-invert">Ask</p>
+      <h2 class="band-title">Want the longer version?</h2>
+      <p class="band-body">Happy to walk through the parts that didn't make the page — the dead ends especially.</p>
+      <div class="band-actions">
+        <a class="btn btn-primary" href="mailto:[YOUR@EMAIL.COM]">Email me</a>
+        <button class="btn btn-ghost" type="button" data-copy="[YOUR@EMAIL.COM]">Copy address</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== FOOTER (same on every page) ==================== -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p>Nicholas Gray · Updated [MONTH YEAR]</p>
+    <ul class="footer-links">
+      <li><a href="mailto:[YOUR@EMAIL.COM]">Email</a></li>
+      <li><a href="[LINKEDIN URL]">LinkedIn</a></li>
+      <li><a href="[RESUME.PDF]">Résumé</a></li>
+    </ul>
+  </div>
+</footer>
+
+<!-- ==================== FEE SCHEDULE HUB — bespoke case study ====================
+     Real content, adapted from the project's case-study writeup. Bracketed
+     fields (timeframe, team) are flagged in the source material as needing
+     confirmation before this goes fully public — check those before sharing
+     the link widely. No screenshots yet: the supplied images still show
+     what look like real network/system names (UBH General, OneNet P2,
+     Mamsi-US, Facets, COSMOS, NDB) that need redacting first.
+     ============================================================ -->
+<template id="case-fee-schedule-hub">
+    <p class="eyebrow" id="modal-eyebrow">Case study · AI-assisted fee schedule management platform</p>
+    <h1 class="case-title" id="modal-title">Fee Schedule Hub</h1>
+    <p class="case-summary" id="modal-summary">A centralized, AI-assisted platform for finding, creating, tracking, and auditing fee schedules — replacing a workflow that had lived across spreadsheets, SharePoint, and email. Requesters, approvers, and operations teams now share one system instead of three.</p>
+
+    <dl class="facts-grid">
+      <div><dt>Role</dt><dd>UX Engineer / Product UX contributor — discovery through UAT</dd></div>
+      <div><dt>Timeframe</dt><dd>[CONFIRM DATES] — evidence spans February–July 2026</dd></div>
+      <div><dt>Team &amp; collaborators</dt><dd>[CONFIRM TEAM] — product manager, UX engineer, engineers, business SMEs, operations &amp; compliance/audit partners</dd></div>
+      <div><dt>Tools &amp; methods</dt><dd>Current-state journey mapping, requirements workshops, AI prompt research, progressive-disclosure IA, UAT</dd></div>
+    </dl>
+
+    <div class="case-body">
+      <section class="case-section">
+        <h2>Overview</h2>
+        <p>Fee schedule data — the rates and rules that govern how claims get priced — lived across Excel files, SharePoint folders, and email threads. Requesters, leadership approvers, and operations/pricing teams each worked from their own copy of the truth. I helped design the platform that replaced that patchwork: a single hub to search, create, edit, deactivate, approve, track, and audit fee schedules, with an AI assistant layered on top rather than in place of human review.</p>
+      </section>
+
+      <section class="case-section">
+        <h2>Context &amp; constraints</h2>
+        <p>Search required knowing the exact fee schedule name in advance — there was no way to browse or compare. Stakeholders described it as a scavenger hunt: incomplete discovery regularly led teams to create a new one-off schedule instead of finding the one that already existed. That duplication, plus approvals tracked entirely over email and no consistent template across requests, made the workflow hard to govern as it scaled.</p>
+        <p>Constraints that shaped the design:</p>
+        <ul class="case-list">
+          <li>Every request touched multiple roles and systems before it was "done" — a service-design problem, not a single-screen one</li>
+          <li>Audit and compliance review had to survive contact with an AI-assisted workflow, not get bolted on afterward</li>
+          <li>Bulk updates across many schedules at once were needed eventually, but had to be sequenced as a fast-follow rather than block the initial build</li>
+        </ul>
+      </section>
+
+      <section class="case-section">
+        <h2>My role &amp; collaborators</h2>
+        <p>My strongest contribution was translating a deeply operational, spreadsheet-based workflow into a structured product experience that could support both human decision-making and AI-assisted automation. I worked across information architecture, the search and AI panel design, workflow states and validation, request tracking and audit visibility, bulk-action strategy, and a series of development-ready UX decisions — partnering closely with product and engineering throughout rather than handing off a finished design.</p>
+      </section>
+
+      <section class="case-section">
+        <h2>Research &amp; insights</h2>
+        <h3>What we did</h3>
+        <ul class="case-list">
+          <li>Reconstructed the current-state workflow from stakeholder discussions and a current-journey map</li>
+          <li>Ran requirements sessions to surface search needs, pain points, and workflow gaps</li>
+          <li>Collected real AI prompt examples — how people would actually ask for a lookup, a comparison, or a deactivation — to shape the assistant's design</li>
+        </ul>
+        <h3>What changed our minds</h3>
+        <ul class="case-list">
+          <li>Search needed to work by attribute (state, line of business, license level, service code, network, rate range, modifiers), not just by exact name</li>
+          <li>Decision support — comparing schedules and surfacing near-matches — mattered as much as search itself, because it's what actually prevents duplicates</li>
+        </ul>
+        <blockquote class="case-quote">
+          <p>Searching could feel like a scavenger hunt — incomplete discovery meant teams sometimes created a new one-off schedule instead of finding the one that already existed.</p>
+          <cite>From a requirements discussion with requester-team stakeholders</cite>
+        </blockquote>
+      </section>
+
+      <section class="case-section">
+        <h2>Design exploration &amp; rationale</h2>
+        <p>I structured the create/edit experience as a single page with persistent context, rather than a multi-step wizard: identity and scope, geographic and regulatory scope, pricing definition, claims system configuration, escalators, retroactivity, approvals, and back-office metadata, with pricing definition as the primary work surface. The spreadsheet had every field visible at once; the platform didn't need to. Progressive disclosure kept advanced and conditional fields out of the way until they were relevant — the recurring design tension was between showing everything that had been migrated and reducing cognitive load, and progressive disclosure was the resolution that kept coming back.</p>
+        <p>The AI panel sits alongside the form rather than replacing it: it can populate fields from a prompt, but every AI-assumed value is visibly marked and the form stays editable, so a human reviews and can override before anything submits.</p>
+        <figure class="case-figure">
+          <div class="case-figure-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 15l-5-5-8 8"/></svg>
+              <span class="visually-hidden">Add a redacted screenshot for this section</span>
+            </div>
+            <figcaption>[ADD SCREENSHOT: the AI side panel populating a request from a prompt, with AI-assumed fields marked for review — once network/system names are redacted.]</figcaption>
+        </figure>
+      </section>
+
+      <section class="case-section">
+        <h2>Prototyping &amp; testing</h2>
+        <ul class="case-list">
+          <li><strong>UAT review:</strong> search/view, create, edit, deactivate, request tracking, approvals, and notifications were walked through end to end with stakeholders</li>
+          <li><strong>Edge cases surfaced in engineering review:</strong> audit tables needed license-level specificity, modifiers needed clearer representation, and the cap table structure had to align with backend data</li>
+          <li><strong>Import handling:</strong> reworked so a bad import produced a reviewable error state instead of simply blocking the user</li>
+        </ul>
+      </section>
+
+      <section class="case-section">
+        <h2>Outcomes &amp; impact</h2>
+        <p>The work reached UAT/demo readiness covering search, create, edit, deactivate, request tracking, approvals, email notifications, and associated-entity visibility — addressing every major pain point from discovery: fragmented lookup, manual intake, email-driven approvals, limited tracking, and duplicate-schedule risk. Production metrics weren't available at the time of writing; I'm holding the numbers below until they're validated rather than estimating them.</p>
+        <ul class="outcome-list">
+          <li>Reached UAT across search, create/edit/deactivate, tracking &amp; approvals<span>Evidence-backed against UAT review materials</span></li>
+          <li>[Search efficiency — to confirm]<span>[Average lookup time, before vs. after]</span></li>
+          <li>[Duplicate-request reduction — to confirm]<span>[Once production analytics are available]</span></li>
+        </ul>
+      </section>
+
+      <section class="case-section">
+        <h2>Learnings &amp; reflections</h2>
+        <p>Four things I'd carry into the next enterprise workflow: don't replicate the spreadsheet one-to-one — find the decision-critical fields and disclose the rest progressively. AI is only trustworthy when its assumptions are visible and reversible, not when it's fastest. Governance — approvals, audit visibility, change history, role-based actions — isn't a back-office add-on; it's what makes people trust the workflow enough to actually leave the spreadsheet behind. And enterprise design systems need to flex for real operational edge cases — modifiers, cap tables, import errors — or the reusable patterns stop being reusable.</p>
+      </section>
+    </div>
+</template>
+
+<!-- ==================== CARE PATHWAYS — bespoke case study ====================
+     Written from the portfolio case-study PDF, with supporting detail from the
+     two internal research decks. Internal shorthand has been expanded or
+     dropped on purpose — "CPW", "OG", "OHPA", "OCM 2.0", "dispositions" and
+     "mashup" read as jargon outside the company, so they are not used here.
+     The hero image is a STOCK PHOTO standing in for real product imagery:
+     swap it for a redacted screen once you have one cleared. The internal
+     decks are stamped "© 2024 Optum. All Rights Reserved.", so don't lift
+     slides from them directly.
+     ============================================================ -->
+<template id="case-care-pathways">
+    <p class="eyebrow" id="modal-eyebrow">Case study · Guided care navigation for mobile &amp; web</p>
+    <h1 class="case-title" id="modal-title">Care Pathways</h1>
+    <p class="case-summary" id="modal-summary">A guided care navigation experience that turned scattered health, benefits, and program content into personalized journeys — so members could see what to do next instead of having to know what to search for.</p>
+
+    <!-- Decorative stock banner — replace with a cleared product screen. -->
+    <figure class="case-hero">
+      <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1600&amp;q=80"
+           alt="" aria-hidden="true" loading="lazy">
+    </figure>
+
+    <dl class="facts-grid">
+      <div><dt>Role</dt><dd>Lead Designer — research through delivery, mobile &amp; web</dd></div>
+      <div><dt>Timeframe</dt><dd>March 2024 – January 2025 (11 months)</dd></div>
+      <div><dt>Team &amp; collaborators</dt><dd>2 product owners, 4 mobile engineers, 5 web engineers, content strategists, clinical and advocate SMEs</dd></div>
+      <div><dt>Tools &amp; methods</dt><dd>Journey mapping, IA modelling, moderated feedback sessions, usability testing, prototype walkthroughs, accessibility review</dd></div>
+    </dl>
+
+    <div class="case-body">
+      <section class="case-section">
+        <h2>Overview</h2>
+        <p>People hit major health events — a new diagnosis, a pregnancy, a benefits change, a caregiving crisis — and rarely know what to do next. The programs, benefits, and support services that could help already existed, but they were spread across separate systems and channels, and finding them assumed you already knew what to search for.</p>
+        <p>Care Pathways reframed that content as guided journeys inside a member-facing health app and its companion web experience. As Lead Designer I shaped the member experience across mobile and web, aligned it with the workflows care advocates use on the phone, and turned a sprawling content library into a product model that could scale: care path, journey, activity, recommendation, support action.</p>
+      </section>
+
+      <section class="case-section">
+        <h2>Context &amp; constraints</h2>
+        <p>The business goal was to move past a repository-style experience and proactively surface relevant guidance based on a member's circumstances — increasing engagement with digital guidance, improving benefit use and program enrollment, and reducing repeat calls to support. The design had to hold up under real constraints:</p>
+        <ul class="case-list">
+          <li>Mobile and web both had to work, keeping parity where it mattered without ignoring platform differences</li>
+          <li>Content had to scale across many pathways and journeys without recreating the overwhelming library we were replacing</li>
+          <li>Member-facing and advocate-facing views needed to stay synchronized, so a support conversation could pick up where the app left off</li>
+          <li>Personalized recommendations had to be understandable and optional — helpful, not prescriptive</li>
+          <li>Accessibility gaps, particularly around filters and mobile popovers, had to be resolved before launch readiness</li>
+        </ul>
+      </section>
+
+      <section class="case-section">
+        <h2>My role &amp; collaborators</h2>
+        <p>I was the only designer on the initiative, working across two product owners and two engineering teams. My contribution was less about screens and more about translation: taking input from content strategists, clinical stakeholders, support leads, and engineers, and turning it into one coherent experience strategy plus implementation-ready design direction for responsive states, filters, journey drawers, and activity details.</p>
+      </section>
+
+      <section class="case-section">
+        <h2>Research &amp; insights</h2>
+        <h3>What we did</h3>
+        <ul class="case-list">
+          <li>A first moderated study on offers, programs, and pathways — 5 participants, 4 tasks, run over 3 weeks</li>
+          <li>A follow-up feedback round on the pathway experience itself — 6 participants, 6 sessions across web and mobile</li>
+          <li>Participants spanned mid-20s to early-50s, clinical and non-clinical backgrounds, average or greater technical comfort</li>
+          <li>Design jams and cross-functional reviews with product, content, and engineering, plus end-to-end prototype walkthroughs</li>
+        </ul>
+        <h3>What changed our minds</h3>
+        <ul class="case-list">
+          <li>People think in life events, not product categories — guidance framed around a diagnosis or a benefits change landed; guidance framed around business units did not</li>
+          <li>Three themes dominated both rounds: <strong>search</strong>, <strong>clarity</strong>, and <strong>complexity</strong>. 40% of participants said tasks took too many steps, and 60% were primarily on a phone</li>
+          <li>Label copy was doing more damage than layout — participants stalled on category names they couldn't interpret</li>
+          <li>Personalization needed an escape hatch: recommendations helped, but people still wanted the full library when the recommendation missed their actual intent</li>
+        </ul>
+        <blockquote class="case-quote">
+          <p>It wasn't intuitive for me when I looked at it — "newly diagnosed," for whatever reason, I don't know.</p>
+          <cite>Participant, moderated feedback session</cite>
+        </blockquote>
+      </section>
+
+      <section class="case-section">
+        <h2>Design exploration &amp; rationale</h2>
+        <p>The reframe was from content library to guided navigation, and the question I kept coming back to was: how might we help someone understand what to do next while still letting them explore everything available? That produced a nested content model — care path, then journey, then activity — which gave the system room to scale while keeping the member's mental model simple: pick a topic, pick the journey that matches your situation, act on small pieces.</p>
+        <p>Five decisions carried the design. Guided journeys organized around life events instead of a searchable library, because people couldn't name what they needed. Bite-sized activities with clear calls to action, because long-form health content created real cognitive load. Flexible progression — explore, skip, complete, resume — because health journeys aren't linear. Recommended content shown alongside full browsing access, to balance relevance against control. And a shared content structure behind both the member and advocate views, so support conversations didn't duplicate what someone had already done digitally.</p>
+        <figure class="case-figure">
+          <div class="case-figure-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 15l-5-5-8 8"/></svg>
+            <span class="visually-hidden">Add a cleared screenshot for this section</span>
+          </div>
+          <figcaption>[ADD ARTIFACT: the information architecture diagram — care path → journey → activity → call to action — or the journey detail page showing activities and progress states.]</figcaption>
+        </figure>
+      </section>
+
+      <section class="case-section">
+        <h2>Prototyping &amp; testing</h2>
+        <ul class="case-list">
+          <li><strong>What held up:</strong> life-event and condition-based categories made the structure legible; short activities turned abstract needs into next steps; in-progress and recommended areas brought people back; average rating in feedback sessions was 8 out of 10</li>
+          <li><strong>What changed:</strong> pathway and journey descriptions were rewritten to say plainly what each option offered, and explore/library views were iterated for scanning</li>
+          <li><strong>Accessibility:</strong> mobile filter patterns were reworked for screen reader usability and clearer interaction</li>
+          <li><strong>Structure:</strong> journey details were split so a short description and a longer side-drawer explanation could coexist without crowding the page</li>
+        </ul>
+      </section>
+
+      <section class="case-section">
+        <h2>Outcomes &amp; impact</h2>
+        <p>The experience shipped as a core personalization capability across the app and guide ecosystem, and became the foundation additional care paths were built on.</p>
+        <ul class="outcome-list">
+          <li>16.0% reduction in repeat calls<span>Measured against the guide and app support experience</span></li>
+          <li>10.5% increase in accepted personalized offers<span>Members acting on recommended programs and offers</span></li>
+          <li>30+ care paths<span>Spanning benefits, family support, financial, health conditions, mental health, and staying healthy</span></li>
+        </ul>
+        <p>Beyond the numbers: members got clearer next steps during genuinely stressful moments and could move at their own pace across devices, and care advocates gained a consistent structure to guide conversations — reducing the one-off navigation help that had been absorbing support time.</p>
+      </section>
+
+      <section class="case-section">
+        <h2>Learnings &amp; reflections</h2>
+        <p>The hardest problem was designing for nonlinear journeys while still giving people a sense of progress. What the team learned is that guidance has to be structured <em>and</em> forgiving — enough structure to reduce uncertainty, enough flexibility that it responds to someone's situation instead of behaving like a checklist they're failing. The core shift was from "find content" to "understand what to do next."</p>
+        <p>What I'd do differently: set up a formal experiment framework earlier, define success measures at the activity, journey, and pathway levels <em>before</em> launch rather than after, and instrument completion, skip, revisit, and handoff behaviour properly. We had directional program metrics but thinner data than I wanted on how individual journeys performed — which is exactly the data that would have sharpened the next round of design decisions.</p>
+      </section>
+    </div>
+</template>
+
+<script src="script.js"></script>
+</body>
+</html>
