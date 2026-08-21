@@ -68,9 +68,13 @@ HTML files and replace every hit. The ones that appear on every page:
 
 | Placeholder | Where | Count |
 |---|---|---|
-| `[YOUR@EMAIL.COM]` | footers, Ask page, CTA bands, `data-copy` attributes | 9 |
-| `[LINKEDIN URL]` | footers, Ask page | 4 |
-| `[RESUME.PDF]` | footers | 3 |
+| `[MONTH YEAR]` | footers — update when you add a project | 4 |
+
+Email (`nic.gray.dsgn@proton.me`) and LinkedIn are wired up already. The email
+appears in 10 places — the four footers, the Ask page mailto and its
+`data-copy` attribute, and the two navy CTA bands in `work.html` (mailto plus
+`data-copy` each). If it ever changes, change all of them; the `data-copy`
+attributes are easy to miss and fail silently by copying the wrong string.
 | `[MONTH YEAR]` | footers — update when you add a project | 3 |
 
 Also outstanding:
@@ -86,8 +90,17 @@ Also outstanding:
   cleared product screen when you have one, or delete the
   `<figure class="case-hero">` block.
 
-For the résumé link, drop the PDF in this folder (e.g. `resume.pdf`) and point
-`[RESUME.PDF]` at it.
+### Updating the résumé
+
+The résumé lives at `assets/resume/nicholas-gray-resume.pdf` and is linked from
+the nav and the footer on every page. The filename is deliberately stable and
+unversioned — **overwrite this file in place** to publish a new revision, so the
+URL never breaks and no markup needs touching. Do not add dates or version
+numbers to the filename, and do not keep a second copy elsewhere in the repo.
+
+Note that `.gitignore` excludes `assets/` and `*.pdf` wholesale, with an
+explicit carve-out for this one file. If you rename it, update those negation
+lines too or the résumé will silently stop deploying.
 
 ---
 
@@ -159,8 +172,12 @@ Worth knowing before you edit, because it's easy to break the look:
 1. **No dividers, no cards, no rules.** Space separates sections; weight and
    colour create hierarchy. If something feels crowded, add space, not a border.
 2. **One typeface.** Source Sans 3, in three weights (400 / 600 / 700).
-3. **Teal is only for interactive things.** Buttons, focus rings, list markers.
-   It's ~2.3:1 against the background, so it can never carry text.
+3. **Teal is only for interactive things.** Buttons, links, the current-page
+   marker. `--color-teal` (`#1B7F78`) clears AA for text (4.82:1 on white,
+   4.62:1 on the page bg) and for non-text UI. There is a second token,
+   `--color-teal-decorative` (`#2BB3A8`), which fails *both* thresholds — it is
+   for ornamental fills only and must never carry text, a border, an icon, or
+   any meaning on its own.
 4. **Amber is only for hover nuance and focus rings.**
 5. **Eyebrows are sentence case** ("Featured work"), never uppercase.
 6. **Spacing comes from the scale**, always — the `--space-*` tokens in
@@ -181,13 +198,24 @@ Worth knowing before you edit, because it's easy to break the look:
 - One `<h1>` per page; don't skip heading levels.
 - Every image needs alt text describing what it *shows*. Decorative images get
   `alt=""`.
-- Focus is an amber ring plus a 1px navy edge — amber alone is only 1.7:1
-  against the background, so the navy hairline carries the contrast.
+- Focus is a two-part indicator: an amber ring offset 2px from the element,
+  plus a 2px navy edge hugging it. Because of the offset, the ring's real
+  neighbour is the page background, not the element — `--color-amber`
+  (`#BA7008`) is 3.72:1 there, 3.88:1 on white, and 3.72:1 on the navy band.
+  The navy edge is 2px rather than 1px because it measures 2.99:1 against the
+  teal button fill, fractionally under 3:1.
 - Medium buttons are 32px, under the 44px touch minimum, so on touch devices
   they get an invisible 44px hit area instead of growing. See the
   `@media (pointer: coarse)` block in section 5 of `styles.css`.
-- White on the teal button fill is 2.2:1, below the 4.5:1 minimum. One token
-  fixes it: set `--color-btn-primary-bg: #1B7F78` for 4.6:1. Left as specced.
+- The primary button ramp darkens monotonically: 4.82:1 → 6.40:1 → 8.61:1 for
+  default → hover → active, all with white labels. States must never lighten;
+  the base sits close enough to the 4.5:1 floor that lightening would drop it
+  below AA. Hover also carries an inset highlight so the step is visible on dim
+  displays, where the colour change alone is easy to miss.
+- Disabled buttons stay clearly separate from the ramp (4.00:1 against the
+  default fill). Disabled *label* text is 2.19:1, which WCAG exempts for
+  inactive controls — but if you ever enable that styling for something
+  interactive, it needs to change.
 
 ### Turn animation down or off
 

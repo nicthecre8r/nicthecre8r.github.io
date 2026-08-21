@@ -33,6 +33,7 @@
       <ul class="nav-list">
         <li><a href="work.html" data-nav-link aria-current="page">Work</a></li>
         <li><a href="ask.html" data-nav-link>Ask</a></li>
+        <li><a href="assets/resume/nicholas-gray-resume.pdf" target="_blank" rel="noopener noreferrer" data-nav-link>Resume<span class="visually-hidden"> (PDF, opens in a new tab)</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"/><path d="m21 3-9 9"/><path d="M15 3h6v6"/></svg></a></li>
       </ul>
     </nav>
   </div>
@@ -76,12 +77,12 @@
       <button class="btn btn-secondary" type="button" data-open-case>Open<span class="visually-hidden"> — Provider Data Central</span></button>
     </article>
 
-    <article class="project reveal" data-category="ux" data-slug="onboardiq">
+    <article class="project reveal" data-category="ux" data-slug="onboardiq" data-case="onboardiq">
       <h2 class="project-title">OnboardIQ</h2>
-      <p class="project-kind">Agentic onboarding workspace</p>
-      <p class="project-desc">An AI-assisted review experience for human-in-the-loop decision support.</p>
-      <p class="project-meta">Lead UX Designer, 2025</p>
-      <p class="project-outcome">Review time per case down <strong>[XX%]</strong></p>
+      <p class="project-kind">AI-assisted provider onboarding workspace</p>
+      <p class="project-desc">Designed a guided, AI-assisted operating model for a fragmented, multi-system provider onboarding workflow.</p>
+      <p class="project-meta">Lead UX Engineer, 2025</p>
+      <p class="project-outcome">Targeting <strong>under 15–20 days</strong> from a ~34–35 day baseline</p>
       <button class="btn btn-secondary" type="button" data-open-case>Open<span class="visually-hidden"> — OnboardIQ</span></button>
     </article>
 
@@ -139,8 +140,8 @@
       <h2 class="band-title">Curious about any of these?</h2>
       <p class="band-body">Happy to walk through the parts that didn't make the page — the dead ends especially.</p>
       <div class="band-actions">
-        <a class="btn btn-primary" href="mailto:[YOUR@EMAIL.COM]">Email me</a>
-        <button class="btn btn-ghost" type="button" data-copy="[YOUR@EMAIL.COM]">Copy address</button>
+        <a class="btn btn-primary" href="mailto:nic.gray.dsgn@proton.me">Email me</a>
+        <button class="btn btn-ghost" type="button" data-copy="nic.gray.dsgn@proton.me">Copy address</button>
       </div>
     </div>
   </section>
@@ -256,8 +257,8 @@
       <h2 class="band-title">Want the longer version?</h2>
       <p class="band-body">Happy to walk through the parts that didn't make the page — the dead ends especially.</p>
       <div class="band-actions">
-        <a class="btn btn-primary" href="mailto:[YOUR@EMAIL.COM]">Email me</a>
-        <button class="btn btn-ghost" type="button" data-copy="[YOUR@EMAIL.COM]">Copy address</button>
+        <a class="btn btn-primary" href="mailto:nic.gray.dsgn@proton.me">Email me</a>
+        <button class="btn btn-ghost" type="button" data-copy="nic.gray.dsgn@proton.me">Copy address</button>
       </div>
     </div>
   </section>
@@ -268,9 +269,9 @@
   <div class="wrap footer-inner">
     <p>Nicholas Gray · Updated [MONTH YEAR]</p>
     <ul class="footer-links">
-      <li><a href="mailto:[YOUR@EMAIL.COM]">Email</a></li>
-      <li><a href="[LINKEDIN URL]">LinkedIn</a></li>
-      <li><a href="[RESUME.PDF]">Résumé</a></li>
+      <li><a href="mailto:nic.gray.dsgn@proton.me">nic.gray.dsgn@proton.me</a></li>
+      <li><a href="https://www.linkedin.com/in/nicholaspgray/" target="_blank" rel="noopener noreferrer">LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+      <li><a href="assets/resume/nicholas-gray-resume.pdf" target="_blank" rel="noopener noreferrer">Resume<span class="visually-hidden"> (PDF, opens in a new tab)</span></a></li>
     </ul>
   </div>
 </footer>
@@ -487,6 +488,239 @@
         <h2>Learnings &amp; reflections</h2>
         <p>The hardest problem was designing for nonlinear journeys while still giving people a sense of progress. What the team learned is that guidance has to be structured <em>and</em> forgiving — enough structure to reduce uncertainty, enough flexibility that it responds to someone's situation instead of behaving like a checklist they're failing. The core shift was from "find content" to "understand what to do next."</p>
         <p>What I'd do differently: set up a formal experiment framework earlier, define success measures at the activity, journey, and pathway levels <em>before</em> launch rather than after, and instrument completion, skip, revisit, and handoff behaviour properly. We had directional program metrics but thinner data than I wanted on how individual journeys performed — which is exactly the data that would have sharpened the next round of design decisions.</p>
+      </section>
+    </div>
+</template>
+
+<!-- ==================== ONBOARDIQ — bespoke case study ====================
+     Content is cleared for confidentiality: employer, platform, vendor, and
+     individual names are replaced with neutral descriptions throughout. Every
+     figure on this page is a target, planning baseline, or workshop estimate —
+     never a measured production outcome. Keep the impact heading and the
+     evidence-strength column intact if you edit this.
+     ============================================================ -->
+<template id="case-onboardiq">
+    <p class="eyebrow" id="modal-eyebrow">Case study · AI-assisted provider onboarding workspace</p>
+    <h1 class="case-title" id="modal-title">OnboardIQ</h1>
+    <p class="case-summary" id="modal-summary">Turning a fragmented, manual, multi-system workflow into a guided operating model — targeting a 34–35 day process for sub-20-day execution.</p>
+
+    <aside class="case-note" aria-label="Confidentiality and evidence note">
+      <p>This case study has been generalized for confidentiality. Company, platform, vendor, and individual names have been replaced with neutral descriptions, and proprietary workflow details have been abstracted. All figures shown are targets, planning baselines, or workshop estimates rather than measured production outcomes.</p>
+    </aside>
+
+    <dl class="facts-grid">
+      <div><dt>Role</dt><dd>Lead UX Engineer / UX lead</dd></div>
+      <div><dt>Context</dt><dd>Large healthcare enterprise, internal operations tooling</dd></div>
+      <div><dt>Status</dt><dd>Future-state design and MVP-in-progress. Metrics shown are targets and planning baselines, not post-launch results.</dd></div>
+    </dl>
+
+    <div class="case-body">
+      <section class="case-section">
+        <h2>Executive summary</h2>
+        <p>OnboardIQ is a portfolio-safe name for a provider onboarding redesign that aimed to turn a fragmented, manual, multi-system workflow into a guided, AI-assisted operating model.</p>
+        <p>The core idea: <strong>one intake record, role-specific work queues, AI-prepared evidence, transparent handoffs, and human decision gates.</strong> This aligned with the strategy direction of shifting from sequential handoffs to parallel execution across contracting, credentialing, and data loading, coordinated by an orchestration layer.</p>
+        <p>Framed another way: one provider request, three role lenses, one source of truth — AI doing the assembly, humans making the decisions.</p>
+        <p>I led UX for the onboarding experience, owning wireframes, work queue interaction patterns, AI summary placement, detail-page structure, stakeholder facilitation, and prototype iteration.</p>
+      </section>
+
+      <section class="case-section">
+        <h2>Problem</h2>
+        <p>The existing onboarding workflow was slow, manual, and split across intake, contracting, credentialing, and downstream data-loading activities. Discovery repeatedly surfaced the same contributors to cycle time and rework: manual verification, duplicate attachments, email-template follow-ups, manual network and fee schedule loading, contract review, credentialing review, and fallout handling.</p>
+        <p>End-to-end turnaround time sat at roughly <strong>34–35 days</strong>, against a target direction of under 15–20 days near-term and 10 days or fewer longer-term.</p>
+        <p>The problem was not "make a better UI." It was a service-design challenge: how to help internal teams coordinate work across multiple handoffs while preserving auditability, human judgment, and operational reporting — and while absorbing state-specific exceptions, special onboarding paths, duplicate requests, missing documentation, and provider-facing status ambiguity.</p>
+      </section>
+
+      <section class="case-section">
+        <h2>Discovery and research</h2>
+        <p>Research was primarily artifact review, journey mapping, SME walkthroughs, internal workshops, stakeholder validation sessions, and prototype reviews.</p>
+        <p>Early workshops focused on empathy mapping, pain points, and model-agnostic intake — standardizing the initial flow regardless of provider model type, and using shared journey materials to identify opportunities. Later workshops reviewed current-state processes for solo and group onboarding, contracting, credentialing, data loading, state-specific workflows, and automation opportunities.</p>
+        <h3>Key inputs</h3>
+        <ul class="case-list">
+          <li><strong>SME process walkthroughs</strong> for current-state onboarding, state-specific coverage workflows, specialty workflows, and manual recruitment paths.</li>
+          <li><strong>Prototype and wireframe validation</strong> for work queues, expanded rows, assignment, duplicate review, missing-document flows, implementation type, status, and detail-page actions.</li>
+          <li><strong>Business feedback analysis</strong> showing participants were more engaged explaining current process than critiquing future-state wireframes — which prompted a shift toward crisper, scenario-based prompts.</li>
+        </ul>
+      </section>
+
+      <section class="case-section">
+        <h2>Key insights</h2>
+        <ul class="case-list">
+          <li><strong>Users needed actionable queues, not dashboards first.</strong> Evidence pointed to MVP emphasis on the work queue as the actionable surface, while leadership dashboards and reporting were deferred to later roadmap work.</li>
+          <li><strong>AI needed to assist, not decide.</strong> The direction consistently positioned AI as an evidence-preparation layer, with humans confirming, overriding, or triggering communications. Human-in-the-loop was treated as necessary before acting.</li>
+          <li><strong>Exception handling was the real design problem.</strong> Duplicate requests, missing tax documentation, coverage-specific bypasses, specialty-workflow misrouting, governance review, disclosure review, and reopened requests all created edge cases that would break a linear happy path.</li>
+          <li><strong>Status and turnaround logic directly affected trust.</strong> Stakeholders raised concerns that reopened or out-of-team work could distort turnaround reporting — supporting a distinct "reopened" state and separated timing for work that leaves the onboarding team.</li>
+        </ul>
+      </section>
+
+      <section class="case-section">
+        <h2>Design strategy</h2>
+        <p>The strategy was to simplify the user's mental model while preserving operational complexity in the system. The future-state direction articulated five principles: model-agnostic intake, upstream validation first, exception-only human work, one tracker with one source of truth, and upstream prevention of downstream fallout.</p>
+        <p>Translated into three experience principles:</p>
+        <ul class="case-list">
+          <li><strong>One record, many role lenses.</strong> The same request supports contracting, credentialing, approval, and data-loading views without forcing users to reconstruct context.</li>
+          <li><strong>Evidence before action.</strong> AI summaries, evidence cards, validation checks, and source-backed rationales help users decide quickly without hiding risk.</li>
+          <li><strong>Human accountability by design.</strong> Provider outreach, push to contract, duplicate handling, and status transitions all preserve review, confirmation, and audit trails.</li>
+        </ul>
+
+        <figure class="case-figure-wide">
+          <!-- TODO: drop the service blueprint export at images/onboardiq/service-blueprint.png
+               and update width/height below to the file's real intrinsic pixel
+               dimensions. Until the file exists this <img> will 404. -->
+          <img src="images/onboardiq/service-blueprint.png"
+               alt="Service blueprint in four stages — intake, parallel contracting and credentialing preparation, convergence review, then activation and status update. AI prepares evidence at each stage, and human decision gates sit before activation and before any provider-facing communication."
+               width="1600" height="900" loading="lazy" decoding="async">
+          <figcaption>Portfolio-safe service blueprint showing how one intake record becomes role-specific work, with AI preparation and human decision gates before activation and status updates.</figcaption>
+        </figure>
+      </section>
+
+      <section class="case-section">
+        <h2>Solution design</h2>
+        <p>An AI-assisted onboarding workspace built around:</p>
+        <ul class="case-list">
+          <li><strong>A work queue</strong> containing request identity, suggested entity type, tax identifier, status, state/region, assignment, and AI summary / next-best-action signals.</li>
+          <li><strong>Expanded-row patterns</strong> surfacing duplicate indicators, missing documentation, AI validation results, and action affordances — without forcing users into a detail page for every decision.</li>
+          <li><strong>Bulk assignment and reassignment</strong>, including selected-row affordances and actions such as assign to me, reassign, and clear assignment.</li>
+          <li><strong>A request detail page</strong> with provider snapshot, status, stepper/progress model, exceptions, implementation type, state eligibility and fee schedules, attachments, AI validation checks, and notes/activity history.</li>
+          <li><strong>Role-specific surfaces</strong> for contract managers, credentialing processors, approvers, data-loading operators, provider support, and leadership monitoring.</li>
+        </ul>
+        <p>Notably, the solution avoided over-claiming full automation. AI prepared evidence, classified exceptions, generated summaries, and supported next actions — while human review was preserved at every key decision point.</p>
+      </section>
+
+      <section class="case-section">
+        <h2>Validation</h2>
+        <p>Validation ran through recurring stakeholder walkthroughs, internal alignment sessions, and design reviews rather than formal usability testing. Stakeholders reviewed work queue columns, filters, assignment, duplicate criteria, missing-information flows, status naming, and detail-page action placement.</p>
+        <p>The most useful learning was methodological. Business users gave limited feedback when asked broad questions about wireframes — in one reviewed session, only about <strong>5% of utterances</strong> represented actual end-user feedback. I treated that as a research-method problem rather than a user problem, and moved the team toward scenario-based prompts: asking participants what they would do when a request was missing tax documentation, or when it looked like a duplicate. Feedback moved from silence to decision-quality input.</p>
+      </section>
+
+      <section class="case-section">
+        <h2>Impact — targets, not measured results</h2>
+        <p>Post-launch measurement was not available at the time of writing. The following are targets and planning baselines:</p>
+        <ul class="case-list">
+          <li>Reduce end-to-end turnaround time from approximately <strong>34–35 days</strong> to a majority path of <strong>under 15–20 days</strong> near-term and <strong>10 days or fewer</strong> future-state.</li>
+          <li>Shift from sequential handoffs toward parallel contracting, credentialing, and data-loading preparation, with final convergence gates before activation.</li>
+          <li>Improve operational visibility through queue aging, fallout, straight-through processing, turnaround time, and human-in-the-loop burden metrics in future reporting concepts.</li>
+          <li>Support managers who track staff throughput expectations of roughly <strong>50 requests per week / 200 per month</strong>, with reporting used for aging inventory, assignments, and turnaround time.</li>
+        </ul>
+
+        <figure class="case-figure">
+          <svg class="case-chart" viewBox="0 0 520 195" role="img"
+               aria-label="Bar chart of end-to-end turnaround time targets. Current state planning baseline, 34 to 35 days. Near-term direction for 2026, 15 to 20 days. Future-state direction for 2027 and beyond, 10 days or fewer.">
+            <title>End-to-end turnaround time targets</title>
+            <desc>Three horizontal bars on a shared axis from 0 to 40 days. The current-state planning baseline is 34 to 35 days, the near-term direction is 15 to 20 days, and the future-state direction is 10 days or fewer.</desc>
+
+            <!-- gridlines at 0/10/20/30/40 days -->
+            <g class="chart-grid" stroke-width="1">
+              <line x1="155" y1="14" x2="155" y2="154"/>
+              <line x1="242.5" y1="14" x2="242.5" y2="154"/>
+              <line x1="330" y1="14" x2="330" y2="154"/>
+              <line x1="417.5" y1="14" x2="417.5" y2="154"/>
+              <line x1="505" y1="14" x2="505" y2="154"/>
+            </g>
+
+            <!-- bars: 8.75 user units per day -->
+            <rect class="chart-bar-current" x="155" y="20"  width="301.9" height="28" rx="2"/>
+            <rect class="chart-bar-near"    x="155" y="66"  width="153.1" height="28" rx="2"/>
+            <rect class="chart-bar-future"  x="155" y="112" width="87.5"  height="28" rx="2"/>
+
+            <!-- value labels, inside the bars -->
+            <g class="chart-value" font-size="13" font-weight="700" text-anchor="end">
+              <text x="448" y="39">34–35 days</text>
+              <text x="301" y="85">15–20 days</text>
+              <text x="235" y="131">≤10 days</text>
+            </g>
+
+            <!-- series labels -->
+            <g class="chart-series" font-size="13" text-anchor="end">
+              <text x="143" y="39">Current state</text>
+              <text x="143" y="85">Near-term (2026)</text>
+              <text x="143" y="131">Future-state (2027+)</text>
+            </g>
+
+            <!-- axis -->
+            <line class="chart-axis" x1="155" y1="154" x2="505" y2="154" stroke-width="1"/>
+            <g class="chart-tick" font-size="12" text-anchor="middle">
+              <text x="155" y="170">0</text>
+              <text x="242.5" y="170">10</text>
+              <text x="330" y="170">20</text>
+              <text x="417.5" y="170">30</text>
+              <text x="505" y="170">40</text>
+              <text x="330" y="190">End-to-end turnaround time target (days)</text>
+            </g>
+          </svg>
+          <figcaption>Current and planned turnaround-time ranges from the strategy source. Treat as target impact, not realized production impact. Sourced as current/planned ranges, not confirmed post-launch measured results.</figcaption>
+        </figure>
+
+        <div class="case-table">
+          <table>
+            <caption>Planning figures and workshop estimates — targets and baselines, not measured outcomes.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Metric</th>
+                <th scope="col">Baseline / current</th>
+                <th scope="col">Target or expected</th>
+                <th scope="col">Evidence strength</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">End-to-end turnaround time</th>
+                <td>~34–35 days</td>
+                <td>&lt;15–20 days near-term; ≤10 days future-state</td>
+                <td>Medium — target, not realized outcome</td>
+              </tr>
+              <tr>
+                <th scope="row">Overall current process time</th>
+                <td>~30–33 days</td>
+                <td>—</td>
+                <td>Medium — workshop estimate</td>
+              </tr>
+              <tr>
+                <th scope="row">Contracting time</th>
+                <td>10–12 days</td>
+                <td>—</td>
+                <td>Medium — workshop estimate</td>
+              </tr>
+              <tr>
+                <th scope="row">Credentialing time</th>
+                <td>~7 days</td>
+                <td>—</td>
+                <td>Medium — workshop estimate</td>
+              </tr>
+              <tr>
+                <th scope="row">Provider contract signing expectation</th>
+                <td>—</td>
+                <td>7 days from provider after contract sent</td>
+                <td>Medium — operational expectation</td>
+              </tr>
+              <tr>
+                <th scope="row">Counter-signature volume opportunity</th>
+                <td>Manual process</td>
+                <td>~2,000 contracts/month</td>
+                <td>Medium — planning input</td>
+              </tr>
+              <tr>
+                <th scope="row">Staff throughput expectation</th>
+                <td>—</td>
+                <td>50 requests/week; 200/month</td>
+                <td>Medium — single source</td>
+              </tr>
+              <tr>
+                <th scope="row">Feedback quality signal</th>
+                <td>—</td>
+                <td>~5% actual user feedback in one reviewed session</td>
+                <td>Low/Medium — one session</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="case-section">
+        <h2>Reflection</h2>
+        <p>This project required shifting from screen production to systems thinking: mapping operational complexity, negotiating scope, building alignment, and making AI understandable and accountable. It also required design leadership through prioritization — when pricing and onboarding competed for attention, the team agreed onboarding should hold full focus until new pricing requirements emerged.</p>
+        <blockquote class="case-quote">
+          <p>The hardest part was not designing the queue. It was helping stakeholders imagine a future workflow while protecting the operational nuances that made their current process work.</p>
+        </blockquote>
       </section>
     </div>
 </template>
