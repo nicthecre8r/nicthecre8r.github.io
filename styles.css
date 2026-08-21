@@ -15,9 +15,24 @@
   --color-muted:       #5A6472;
   --color-inverse:     #FFFFFF;
   --color-navy:        #1B2A41;
-  --color-teal:        #2BB3A8;
-  --color-teal-hover:  #229A90;
-  --color-amber:       #FFB347;
+
+  /* Teal ramp. Contrast is measured against white; the page bg (#FAFAFA) is
+     ~4% lower and is the binding surface, quoted second. States darken —
+     never lighten — because the base already sits near the AA floor. */
+  --color-teal:        #1B7F78;   /* 4.82:1 white / 4.62:1 page — AA text, AA non-text */
+  --color-teal-hover:  #166A64;   /* 6.40:1 white / 6.13:1 page */
+  --color-teal-active: #12554F;   /* 8.61:1 white / 8.25:1 page */
+
+  /* Decorative only. Fails BOTH 4.5:1 (text) and 3:1 (non-text) on white and
+     on the page bg — 2.59:1 and 2.48:1. Never use it for text, borders,
+     icons, focus indicators, or any element that carries meaning on its own.
+     Safe for filled shapes that are purely ornamental. */
+  --color-teal-decorative: #2BB3A8;
+
+  /* Amber carries the focus ring, so it must clear 3:1 on every surface a
+     ring can land on: page bg, white, and the navy band. #FFB347 was 1.71:1
+     on page and failed all three. */
+  --color-amber:       #BA7008;   /* 3.72:1 page / 3.88:1 white / 3.72:1 navy */
   --color-bg:          #FAFAFA;
   --color-bg-muted:    #D3D3D3;
   --color-surface:     #FFFFFF;
@@ -65,7 +80,9 @@
   --color-amber-tint: #FDECD3;
   --color-disabled-bg: #E8EAED;
   --color-disabled-text: #9AA0A8;
-  --color-btn-primary-bg: var(--color-teal);
+  --color-btn-primary-bg:        var(--color-teal);
+  --color-btn-primary-bg-hover:  var(--color-teal-hover);
+  --color-btn-primary-bg-active: var(--color-teal-active);
 }
 
 /* 2. BASE ------------------------------------------------------------------ */
@@ -89,7 +106,25 @@ button { font: inherit; }
 
 a { color: var(--color-navy); text-decoration-color: var(--color-teal); text-decoration-thickness: 2px; text-underline-offset: 3px; }
 
-:focus-visible { outline: 3px solid var(--color-amber); outline-offset: 2px; box-shadow: 0 0 0 1px var(--color-navy); border-radius: 3px; }
+/* Two-part focus indicator, read outward from the element edge:
+     0–2px   navy edge   (box-shadow spread — hugs the element)
+     2–5px   GAP         (page background shows through)
+     5–8px   amber ring  (outline, drawn at outline-offset)
+
+   The offset must exceed the navy spread or the shadow fills the gap and the
+   ring reads as a border welded to the element — outline-offset: 2px with a
+   2px shadow left exactly zero visible gap. 5px puts 3px of page background
+   between them. Outline and box-shadow are both outside the box model, so
+   none of this shifts layout.
+
+   Contrast, and why it is split across two colours: amber is 3.72:1 against
+   the page background and 3.88:1 against white, but only 1.24:1 against the
+   teal button fill — on its own it would vanish against the button. It never
+   touches the fill, because the gap separates them. The navy edge is what
+   borders the element (13.84:1 on page bg, 2.99:1 on the teal fill), and it
+   is 2px rather than 1px to stay perceivable at that ratio. Changing either
+   colour in isolation breaks the pairing. */
+:focus-visible { outline: 3px solid var(--color-amber); outline-offset: 5px; box-shadow: 0 0 0 2px var(--color-navy); border-radius: 3px; }
 
 .skip-link { position: absolute; left: -9999px; top: var(--space-2); padding: var(--space-2) var(--space-4); background: var(--color-navy); color: var(--color-inverse); text-decoration: none; z-index: 300; }
 .skip-link:focus { left: var(--space-4); }
@@ -118,8 +153,14 @@ a { color: var(--color-navy); text-decoration-color: var(--color-teal); text-dec
 .mark { display: grid; place-items: center; width: var(--space-6); height: var(--space-6); border-radius: 50%; background: var(--color-navy); color: var(--color-inverse); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.02em; }
 
 .nav-list { display: flex; gap: var(--space-5); font-size: var(--size-small); }
-.nav-list a { text-decoration: none; padding: var(--space-2) 0; border-bottom: 2px solid transparent; transition: border-color var(--speed) var(--ease); }
+.nav-list a { display: inline-flex; align-items: center; gap: var(--space-1); text-decoration: none; padding: var(--space-2) 0; border-bottom: 2px solid transparent; transition: border-color var(--speed) var(--ease); }
 .nav-list a:hover, .nav-list a[aria-current="page"] { border-bottom-color: var(--color-teal); }
+
+/* Marks a nav item that leaves the page. Sized in em so it tracks the label
+   rather than needing its own size value, and inherits colour via
+   currentColor. Decorative only — aria-hidden, because the link's
+   visually-hidden text already announces "opens in a new tab". */
+.nav-list a svg { width: 1em; height: 1em; flex: none; }
 
 .nav-toggle { display: none; align-items: center; gap: var(--space-2); background: none; border: 1px solid var(--color-navy); border-radius: var(--radius); padding: var(--space-2) var(--space-3); font-size: var(--size-small); color: var(--color-navy); cursor: pointer; }
 .nav-toggle svg { width: 16px; height: 16px; }
@@ -128,8 +169,14 @@ a { color: var(--color-navy); text-decoration-color: var(--color-teal); text-dec
 .btn { display: inline-flex; align-items: center; justify-content: center; min-height: var(--btn-h-md); padding: 0 var(--space-3); font-family: inherit; font-size: var(--size-btn); font-weight: 700; line-height: 1.2; border: 1px solid transparent; border-radius: var(--radius-btn); text-decoration: none; cursor: pointer; appearance: none; transition: background-color var(--speed) var(--ease), border-color var(--speed) var(--ease), box-shadow var(--speed) var(--ease); }
 .btn-lg { min-height: var(--btn-h-lg); padding: 0 var(--space-5); font-size: 1rem; border-radius: var(--radius-btn-lg); }
 
+/* The step from default to hover is only ~1.6:1 apart in luminance, which is
+   hard to see on a dim or low-gamut display. The inset highlight gives hover a
+   second, non-colour cue. It's an inset shadow rather than a border because a
+   border-width change would shift layout by a pixel. Active deepens the inset
+   and drops the lift shadow, so the button reads as pressed in. */
 .btn-primary { background: var(--color-btn-primary-bg); color: var(--color-inverse); border-color: var(--color-btn-primary-bg); }
-.btn-primary:hover { background: var(--color-teal-hover); border-color: var(--color-teal-hover); box-shadow: 0 2px 6px rgba(27,42,65,0.20); }
+.btn-primary:hover { background: var(--color-btn-primary-bg-hover); border-color: var(--color-btn-primary-bg-hover); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.30), 0 2px 6px rgba(27,42,65,0.20); }
+.btn-primary:active { background: var(--color-btn-primary-bg-active); border-color: var(--color-btn-primary-bg-active); box-shadow: inset 0 2px 4px rgba(0,0,0,0.28); }
 
 .btn-secondary { background: var(--color-surface); color: var(--color-navy); border-color: var(--color-navy); }
 .btn-secondary:hover { background: var(--color-amber-tint); box-shadow: inset 0 0 0 1px var(--color-navy), 0 2px 6px rgba(27,42,65,0.20); }
@@ -140,7 +187,9 @@ a { color: var(--color-navy); text-decoration-color: var(--color-teal); text-dec
 .btn-ghost { background: transparent; color: var(--color-inverse); border-color: rgba(255,255,255,0.55); }
 .btn-ghost:hover { border-color: var(--color-amber); background: rgba(255,255,255,0.08); }
 
-.btn:focus-visible { outline: 3px solid var(--color-amber); outline-offset: 2px; box-shadow: 0 0 0 1px var(--color-navy); }
+/* Same geometry as the global rule above; repeated because .btn-primary:hover
+   and :active also set box-shadow and would otherwise win on specificity. */
+.btn:focus-visible { outline: 3px solid var(--color-amber); outline-offset: 5px; box-shadow: 0 0 0 2px var(--color-navy); }
 .btn-ghost:focus-visible { box-shadow: none; }
 
 .btn:disabled, .btn[aria-disabled="true"] { background: var(--color-disabled-bg); color: var(--color-disabled-text); border-color: transparent; box-shadow: none; cursor: not-allowed; }
@@ -222,7 +271,9 @@ a { color: var(--color-navy); text-decoration-color: var(--color-teal); text-dec
 
 .case-list { margin-top: var(--space-3); }
 .case-list li { position: relative; padding-left: var(--space-5); margin-top: var(--space-2); }
-.case-list li::before { content: ""; position: absolute; left: 0; top: 0.68em; width: var(--space-2); height: 2px; background: var(--color-teal); }
+/* Ornamental dash only — the list is already a <ul>, so this marker carries no
+   meaning on its own and may use the decorative teal. */
+.case-list li::before { content: ""; position: absolute; left: 0; top: 0.68em; width: var(--space-2); height: 2px; background: var(--color-teal-decorative); }
 
 .case-quote { margin: var(--space-6) 0; font-size: var(--size-lede); color: var(--color-navy); max-width: var(--measure-lead); }
 .case-quote cite { display: block; margin-top: var(--space-2); font-size: var(--size-small); font-style: normal; color: var(--color-muted); }
@@ -236,6 +287,47 @@ a { color: var(--color-navy); text-decoration-color: var(--color-teal); text-dec
 .outcome-list li { font-size: var(--size-lede); color: var(--color-navy); font-weight: 600; }
 .outcome-list li + li { margin-top: var(--space-3); }
 .outcome-list span { display: block; font-size: var(--size-small); font-weight: 400; color: var(--color-muted); }
+
+/* --- Evidence / confidentiality callout ------------------------------------
+   Shares the body reading column so it scans as part of the prose, not as a
+   banner. The accent rule uses --space-1 rather than a raw width, keeping it
+   on the spacing scale. */
+.case-note { max-width: var(--measure); margin-top: var(--space-6); padding: var(--space-1) 0 var(--space-1) var(--space-5); border-left: var(--space-1) solid var(--color-teal); }
+.case-note p { font-size: var(--size-small); color: var(--color-muted); }
+.case-note p + p { margin-top: var(--space-3); }
+
+/* --- Wide figure -----------------------------------------------------------
+   .case-hero crops to a fixed 3:1 band, which would slice a diagram. This
+   keeps the asset's own aspect ratio at the full reading width. */
+.case-figure-wide { margin: var(--space-6) 0; max-width: var(--measure); }
+.case-figure-wide img { width: 100%; height: auto; border-radius: var(--radius); background: var(--color-bg-muted); }
+.case-figure-wide figcaption { margin-top: var(--space-3); font-size: var(--size-small); color: var(--color-muted); }
+
+/* --- Data table ------------------------------------------------------------
+   The wrapper scrolls on narrow screens so a wide table never forces the page
+   to scroll sideways. Hairline rules are 1px, matching the border convention
+   already used by .btn and .nav-list — the system has no border-width token,
+   and one is not worth introducing for this. */
+.case-table { max-width: var(--measure); margin: var(--space-5) 0; overflow-x: auto; }
+.case-table table { width: 100%; border-collapse: collapse; font-size: var(--size-small); }
+.case-table caption { text-align: left; font-size: var(--size-small); color: var(--color-muted); margin-bottom: var(--space-3); max-width: var(--measure); }
+.case-table th, .case-table td { text-align: left; vertical-align: top; padding: var(--space-3) var(--space-4) var(--space-3) 0; border-bottom: 1px solid var(--color-bg-muted); }
+.case-table thead th { color: var(--color-navy); font-weight: 700; border-bottom-color: var(--color-muted); }
+.case-table tbody th { font-weight: 600; color: var(--color-navy); }
+
+/* --- Inline SVG chart ------------------------------------------------------
+   Bar fills are tokens so the chart re-themes with the palette. Text sizes are
+   SVG presentation attributes (user units, not CSS px) so they scale with the
+   viewBox instead of fighting it. */
+.case-chart { display: block; width: 100%; max-width: var(--measure); height: auto; margin-top: var(--space-5); }
+.case-chart .chart-bar-current { fill: var(--color-muted); }
+.case-chart .chart-bar-near    { fill: var(--color-teal); }
+.case-chart .chart-bar-future  { fill: var(--color-teal-active); }
+.case-chart .chart-grid { stroke: var(--color-bg-muted); }
+.case-chart .chart-axis { stroke: var(--color-muted); }
+.case-chart .chart-series { fill: var(--color-navy); }
+.case-chart .chart-tick   { fill: var(--color-muted); }
+.case-chart .chart-value  { fill: var(--color-inverse); }
 
 /* 9. ASK & closing band ---------------------------------------------------------- */
 .ask-body { max-width: var(--measure); padding-bottom: var(--space-6); }
@@ -264,7 +356,9 @@ a { color: var(--color-navy); text-decoration-color: var(--color-teal); text-dec
   .site-nav { display: none; flex-basis: 100%; }
   .site-nav.is-open { display: block; }
   .nav-list { flex-direction: column; gap: 0; padding-bottom: var(--space-3); }
-  .nav-list a { display: block; padding: var(--space-3) 0; }
+  /* flex rather than block so the external-link icon stays aligned with the
+     label; both are block-level here, so the full-width tap target is kept. */
+  .nav-list a { display: flex; padding: var(--space-3) 0; }
 }
 
 /* Below the 900px split, the hero image sits behind the copy instead of
