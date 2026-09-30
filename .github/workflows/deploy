@@ -1,0 +1,74 @@
+# Publishes the site to GitHub Pages on every push to main, stamping the
+# footer date as it goes.
+#
+# The date is written into the runner's checkout only — the committed files
+# keep the "Updated [MONTH YEAR]" placeholder, so nothing is ever committed
+# back and the workflow cannot trigger itself.
+#
+# Requires Settings -> Pages -> Build and deployment -> Source = "GitHub Actions".
+# With "Deploy from a branch" this workflow still runs, but Pages ignores its
+# output and serves the branch verbatim — placeholder and all.
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Stamp the footer date
+        # Runners are UTC; this keeps the month correct near a boundary.
+        env:
+          TZ: America/New_York
+        run: |
+          set -euo pipefail
+          STAMP=$(date +'%B %Y')
+          echo "Deploy date: $STAMP"
+
+          # Fail loudly if the footer markup ever changes, rather than
+          # silently publishing an unstamped footer.
+          if ! grep -lq 'Updated \[MONTH YEAR\]' *.html 2>/dev/null; then
+            echo "ERROR: no HTML file contains 'Updated [MONTH YEAR]'."
+            echo "The footer markup probably changed. Update this step to match."
+            exit 1
+          fi
+
+          grep -c 'Updated \[MONTH YEAR\]' *.html || true
+          perl -pi -e "s/Updated \[MONTH YEAR\]/Updated $STAMP/g" *.html
+          echo "Stamped footers:"
+          grep -h 'Nicholas Gray' *.html | sort -u
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload the site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
