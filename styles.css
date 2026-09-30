@@ -53,6 +53,7 @@
   --space-4:  1rem;
   --space-5:  1.5rem;
   --space-6:  2rem;
+  --space-7:  2.5rem;   /* 40px — next step on the scale (steps past 4 move in 8px) */
   --space-8:  3rem;
   --space-10: 4rem;
   --space-16: 7rem;
@@ -150,7 +151,13 @@ a { color: var(--color-navy); text-decoration-color: var(--color-teal); text-dec
 .header-inner { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); min-height: var(--space-10); }
 
 .brand { display: inline-flex; align-items: center; text-decoration: none; }
-.mark { display: grid; place-items: center; width: var(--space-6); height: var(--space-6); border-radius: 50%; background: var(--color-navy); color: var(--color-inverse); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.02em; }
+/* Logo mark. The disc is a real <circle> in the inline SVG so one custom
+   property can drive its colour — the artwork PNG is a white-only alpha
+   mask, so it sits on top of any disc colour without needing a recolour or
+   a second file. Hover reuses the primary interaction teal. */
+.logo-mark { --logo-disc: var(--color-navy); display: block; width: var(--space-7); height: var(--space-7); }
+.logo-mark__disc { fill: var(--logo-disc); transition: fill var(--speed) var(--ease); }
+.brand:hover .logo-mark, .brand:focus-visible .logo-mark { --logo-disc: var(--color-teal); }
 
 .nav-list { display: flex; gap: var(--space-5); font-size: var(--size-small); }
 .nav-list a { display: inline-flex; align-items: center; gap: var(--space-1); text-decoration: none; padding: var(--space-2) 0; border-bottom: 2px solid transparent; transition: border-color var(--speed) var(--ease); }
@@ -246,6 +253,7 @@ a { color: var(--color-navy); text-decoration-color: var(--color-teal); text-dec
 .featured .project { padding-top: var(--space-6); }
 
 /* 8. CASE STUDY PAGE (work.html only) ------------------------------------------ */
+.case-page { overflow-x: clip; }
 .case-page[hidden] { display: none; }
 
 .back-link { display: inline-block; margin-bottom: var(--space-6); font-size: var(--size-small); }
@@ -302,6 +310,31 @@ a { color: var(--color-navy); text-decoration-color: var(--color-teal); text-dec
 .case-figure-wide { margin: var(--space-6) 0; max-width: var(--measure); }
 .case-figure-wide img { width: 100%; height: auto; border-radius: var(--radius); background: var(--color-bg-muted); }
 .case-figure-wide figcaption { margin-top: var(--space-3); font-size: var(--size-small); color: var(--color-muted); }
+
+/* Screenshots sitting inside the 68ch measure. Same treatment as
+   .case-figure-wide's image; .case-figure-placeholder above still covers the
+   case where no file exists yet. */
+.case-figure img { width: 100%; height: auto; border-radius: var(--radius); background: var(--color-bg-muted); }
+
+/* One figure per case study may break out of the measure to run the full
+   content width. Sized from the viewport rather than a percentage, because
+   the parent .case-body is capped at --measure and a percentage would
+   inherit that cap. .case-page clips the x-axis so a platform scrollbar
+   can't turn the vw unit into a horizontal scroll. */
+.case-figure-full { margin: var(--space-6) 0; max-width: none; width: min(100vw - 2 * var(--pad-inline), var(--wrap-max) - 2 * var(--pad-inline)); }
+.case-figure-full img { width: 100%; height: auto; border-radius: var(--radius); background: var(--color-bg-muted); }
+.case-figure-full figcaption { max-width: var(--measure); margin-top: var(--space-3); font-size: var(--size-small); color: var(--color-muted); }
+
+/* Provenance line under the first mockup. Deliberately quiet — it is a
+   disclosure, not a caption. */
+.case-credit { max-width: var(--measure); margin-top: var(--space-4); font-size: var(--size-small); color: var(--color-muted); font-style: italic; }
+
+/* Headline numbers in the overview. Collapses to one column on mobile with
+   the rest of the case layout. */
+.case-stats { display: grid; grid-template-columns: 1fr; gap: var(--space-5) var(--gutter); margin-top: var(--space-6); }
+.case-stats li { border-top: 2px solid var(--color-teal); padding-top: var(--space-3); }
+.case-stats b { display: block; font-size: var(--size-h2); line-height: 1.1; color: var(--color-navy); }
+.case-stats span { display: block; margin-top: var(--space-1); font-size: var(--size-small); color: var(--color-muted); }
 
 /* --- Data table ------------------------------------------------------------
    The wrapper scrolls on narrow screens so a wide table never forces the page
@@ -370,6 +403,7 @@ a { color: var(--color-navy); text-decoration-color: var(--color-teal); text-dec
 }
 
 @media (min-width: 640px) {
+  .case-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .discipline { grid-column: span 4; }
   .facts-grid > div { grid-column: span 6; }
 }

@@ -21,7 +21,10 @@
 <header class="site-header">
   <div class="wrap header-inner">
     <a class="brand" href="index.html" aria-label="Nicholas Gray — home">
-      <span class="mark" aria-hidden="true">NG</span>
+      <svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+        <circle class="logo-mark__disc" cx="20" cy="20" r="20"/>
+        <image href="images/logo-mark.png" x="9" y="4" width="22" height="32"/>
+      </svg>
     </a>
 
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
@@ -68,7 +71,14 @@
        ===================================================================== -->
   <div class="wrap project-list" id="projects">
 
-    <article class="project reveal" data-category="ux" data-slug="provider-data-central">
+    <!-- HIDDEN: no case study written for this yet, so it falls back to the
+         generic placeholder template. data-category is "draft" rather than "ux"
+         on purpose: the filter in script.js reassigns .hidden on every card whose
+         category matches the pressed button, so a card left as "ux" would
+         reappear the moment someone clicked UX Design. No filter button targets
+         "draft", so this stays hidden in every state. To restore it: set
+         data-category back to "ux" and drop the hidden attribute. -->
+    <article class="project reveal" data-category="draft" data-slug="provider-data-central" hidden>
       <h2 class="project-title">Provider Data Central</h2>
       <p class="project-kind">Enterprise onboarding platform</p>
       <p class="project-desc">Designed cross-system workflows for provider onboarding.</p>
@@ -104,7 +114,12 @@
       <button class="btn btn-secondary" type="button" data-open-case>Open<span class="visually-hidden"> — Care Pathways</span></button>
     </article>
 
-    <article class="project reveal" data-category="ux" data-slug="next-project">
+    <!-- HIDDEN: template for the next project. Kept as live markup rather than
+         a comment so it stays easy to fill in. See the note above for why
+         data-category is "draft". To use it: fill in the bracketed copy, set
+         data-category to "ux", add data-case if you write a case study, and
+         remove the hidden attribute. -->
+    <article class="project reveal" data-category="draft" data-slug="next-project" hidden>
       <h2 class="project-title">[PROJECT TITLE]</h2>
       <p class="project-kind">[CATEGORY OR PRODUCT TYPE]</p>
       <p class="project-desc">[ONE SENTENCE, UNDER 110 CHARACTERS.]</p>
@@ -389,106 +404,164 @@
 <template id="case-care-pathways">
     <p class="eyebrow" id="modal-eyebrow">Case study · Guided care navigation for mobile &amp; web</p>
     <h1 class="case-title" id="modal-title">Care Pathways</h1>
-    <p class="case-summary" id="modal-summary">A guided care navigation experience that turned scattered health, benefits, and program content into personalized journeys — so members could see what to do next instead of having to know what to search for.</p>
-
-    <!-- Decorative stock banner — replace with a cleared product screen. -->
-    <figure class="case-hero">
-      <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1600&amp;q=80"
-           alt="" aria-hidden="true" loading="lazy">
-    </figure>
+    <p class="case-summary" id="modal-summary">I turned a scattered health content library into guided, plain-language next steps — and it measurably reduced support calls.</p>
 
     <dl class="facts-grid">
-      <div><dt>Role</dt><dd>Lead Designer — research through delivery, mobile &amp; web</dd></div>
-      <div><dt>Timeframe</dt><dd>March 2024 – January 2025 (11 months)</dd></div>
-      <div><dt>Team &amp; collaborators</dt><dd>2 product owners, 4 mobile engineers, 5 web engineers, content strategists, clinical and advocate SMEs</dd></div>
+      <div><dt>Role</dt><dd>Lead Designer</dd></div>
+      <div><dt>Timeline</dt><dd>Mar 2024 – Jan 2025</dd></div>
+      <div><dt>Team</dt><dd>1 designer, 2 product owners, 9 engineers across mobile and web</dd></div>
       <div><dt>Tools &amp; methods</dt><dd>Journey mapping, IA modelling, moderated feedback sessions, usability testing, prototype walkthroughs, accessibility review</dd></div>
     </dl>
 
     <div class="case-body">
+
       <section class="case-section">
         <h2>Overview</h2>
+        <p>Care Pathways reframed a sprawling library of health, benefits, and program content as guided journeys inside a member-facing health app and its companion web experience. As Lead Designer I shaped the member experience across mobile and web, aligned it with the workflows care advocates use on the phone, and turned the library into a product model that could scale: care path, then journey, then activity.</p>
+        <ul class="case-stats">
+          <li><b>16%</b><span>Fewer repeat calls</span></li>
+          <li><b>10.5%</b><span>More accepted personalized offers</span></li>
+          <li><b>30+</b><span>Guided journeys</span></li>
+        </ul>
+      </section>
+
+      <section class="case-section">
+        <h2>The problem</h2>
         <p>People hit major health events — a new diagnosis, a pregnancy, a benefits change, a caregiving crisis — and rarely know what to do next. The programs, benefits, and support services that could help already existed, but they were spread across separate systems and channels, and finding them assumed you already knew what to search for.</p>
-        <p>Care Pathways reframed that content as guided journeys inside a member-facing health app and its companion web experience. As Lead Designer I shaped the member experience across mobile and web, aligned it with the workflows care advocates use on the phone, and turned a sprawling content library into a product model that could scale: care path, journey, activity, recommendation, support action.</p>
+        <p>The content was not missing. It was unfindable by anyone who could not already name what they needed — which is precisely the person a health event creates. Research made the pattern plain: people think in life events, not product categories, and they stalled on category names they could not interpret.</p>
       </section>
 
       <section class="case-section">
-        <h2>Context &amp; constraints</h2>
-        <p>The business goal was to move past a repository-style experience and proactively surface relevant guidance based on a member's circumstances — increasing engagement with digital guidance, improving benefit use and program enrollment, and reducing repeat calls to support. The design had to hold up under real constraints:</p>
-        <ul class="case-list">
-          <li>Mobile and web both had to work, keeping parity where it mattered without ignoring platform differences</li>
-          <li>Content had to scale across many pathways and journeys without recreating the overwhelming library we were replacing</li>
-          <li>Member-facing and advocate-facing views needed to stay synchronized, so a support conversation could pick up where the app left off</li>
-          <li>Personalized recommendations had to be understandable and optional — helpful, not prescriptive</li>
-          <li>Accessibility gaps, particularly around filters and mobile popovers, had to be resolved before launch readiness</li>
-        </ul>
-      </section>
-
-      <section class="case-section">
-        <h2>My role &amp; collaborators</h2>
-        <p>I was the only designer on the initiative, working across two product owners and two engineering teams. My contribution was less about screens and more about translation: taking input from content strategists, clinical stakeholders, support leads, and engineers, and turning it into one coherent experience strategy plus implementation-ready design direction for responsive states, filters, journey drawers, and activity details.</p>
-      </section>
-
-      <section class="case-section">
-        <h2>Research &amp; insights</h2>
-        <h3>What we did</h3>
-        <ul class="case-list">
-          <li>A first moderated study on offers, programs, and pathways — 5 participants, 4 tasks, run over 3 weeks</li>
-          <li>A follow-up feedback round on the pathway experience itself — 6 participants, 6 sessions across web and mobile</li>
-          <li>Participants spanned mid-20s to early-50s, clinical and non-clinical backgrounds, average or greater technical comfort</li>
-          <li>Design jams and cross-functional reviews with product, content, and engineering, plus end-to-end prototype walkthroughs</li>
-        </ul>
-        <h3>What changed our minds</h3>
-        <ul class="case-list">
-          <li>People think in life events, not product categories — guidance framed around a diagnosis or a benefits change landed; guidance framed around business units did not</li>
-          <li>Three themes dominated both rounds: <strong>search</strong>, <strong>clarity</strong>, and <strong>complexity</strong>. 40% of participants said tasks took too many steps, and 60% were primarily on a phone</li>
-          <li>Label copy was doing more damage than layout — participants stalled on category names they couldn't interpret</li>
-          <li>Personalization needed an escape hatch: recommendations helped, but people still wanted the full library when the recommendation missed their actual intent</li>
-        </ul>
-        <blockquote class="case-quote">
-          <p>It wasn't intuitive for me when I looked at it — "newly diagnosed," for whatever reason, I don't know.</p>
-          <cite>Participant, moderated feedback session</cite>
-        </blockquote>
-      </section>
-
-      <section class="case-section">
-        <h2>Design exploration &amp; rationale</h2>
-        <p>The reframe was from content library to guided navigation, and the question I kept coming back to was: how might we help someone understand what to do next while still letting them explore everything available? That produced a nested content model — care path, then journey, then activity — which gave the system room to scale while keeping the member's mental model simple: pick a topic, pick the journey that matches your situation, act on small pieces.</p>
-        <p>Five decisions carried the design. Guided journeys organized around life events instead of a searchable library, because people couldn't name what they needed. Bite-sized activities with clear calls to action, because long-form health content created real cognitive load. Flexible progression — explore, skip, complete, resume — because health journeys aren't linear. Recommended content shown alongside full browsing access, to balance relevance against control. And a shared content structure behind both the member and advocate views, so support conversations didn't duplicate what someone had already done digitally.</p>
+        <h2>From library to guided path</h2>
         <figure class="case-figure">
-          <div class="case-figure-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 15l-5-5-8 8"/></svg>
-            <span class="visually-hidden">Add a cleared screenshot for this section</span>
-          </div>
-          <figcaption>[ADD ARTIFACT: the information architecture diagram — care path → journey → activity → call to action — or the journey detail page showing activities and progress states.]</figcaption>
+          <img src="images/care-pathways/01-before-after-model.png"
+               alt="Two cards side by side. The left, greyed out, reads “The Library — Passive Storage” above a stacked-documents icon. The right, highlighted, reads “The Path — Active Guidance” above an icon of a route connecting two points."
+               width="760" height="296" loading="lazy" decoding="async">
+          <figcaption>The reframe the whole project rests on: content stops being something you store and search, and becomes something that moves you forward.</figcaption>
+        </figure>
+        <p class="case-credit">Representative recreations. Original work under NDA.</p>
+      </section>
+
+      <section class="case-section">
+        <h2>Three levels, one mental model</h2>
+        <figure class="case-figure">
+          <img src="images/care-pathways/02-three-level-map.png"
+               alt="A panel headed “Three Dedicated Levels” under the breadcrumb “Care Path: Managing Diabetes / Journeys”. Three journey cards sit side by side — Journey A Diet &amp; Nutrition, Journey B Glucose Tracking, Journey C Exercise Routines — and each lists three numbered actions, such as “Action 1: Log readings 3×/day”."
+               width="640" height="640" loading="lazy" decoding="async">
+          <figcaption>Topic, then guide, then steps. Managing diabetes is the running example: one care path holds several journeys, and each journey breaks down into actions small enough to finish.</figcaption>
+        </figure>
+        <p>Three levels were enough to organize thirty-plus journeys without rebuilding the overwhelming library we were replacing, and shallow enough that a member never had to hold more than one question in mind: what am I dealing with, which situation matches mine, what do I do first.</p>
+      </section>
+
+      <section class="case-section">
+        <h2>Designed around life moments, not departments</h2>
+        <figure class="case-figure">
+          <img src="images/care-pathways/03-care-paths-landing.png"
+               alt="Care Paths landing page. A banner headed “Find your next step” sits above a section titled “What are you dealing with?” with eight topic cards including Coverage &amp; benefits, Medications, Diabetes, and Mental health, each showing a guide count. Below, “Pick up where you left off” shows two guides with progress bars, and “Recommended for you” shows three suggested actions, each labelled with the reason it was surfaced."
+               width="1440" height="1558" loading="lazy" decoding="async">
+          <figcaption>The landing page asks “What are you dealing with?” rather than presenting a menu of business units. Recommendations carry their reason — “Because you completed Know your numbers” — so guidance stays explainable rather than mysterious.</figcaption>
         </figure>
       </section>
 
       <section class="case-section">
-        <h2>Prototyping &amp; testing</h2>
-        <ul class="case-list">
-          <li><strong>What held up:</strong> life-event and condition-based categories made the structure legible; short activities turned abstract needs into next steps; in-progress and recommended areas brought people back; average rating in feedback sessions was 8 out of 10</li>
-          <li><strong>What changed:</strong> pathway and journey descriptions were rewritten to say plainly what each option offered, and explore/library views were iterated for scanning</li>
-          <li><strong>Accessibility:</strong> mobile filter patterns were reworked for screen reader usability and clearer interaction</li>
-          <li><strong>Structure:</strong> journey details were split so a short description and a longer side-drawer explanation could coexist without crowding the page</li>
-        </ul>
+        <h2>One catalog, filtered by what you're facing</h2>
+        <figure class="case-figure">
+          <img src="images/care-pathways/04-all-guides-catalog.png"
+               alt="The All guides page listing eighteen guides in a three-column grid. A search field, category menu and sort menu sit above filter chips reading All guides, Suggested, In progress, Done and Skipped. Each card shows a title, a one-line description, a step count and time estimate, and a category link; some carry a “Suggested for you” or “Skipped” badge."
+               width="1440" height="1757" loading="lazy" decoding="async">
+          <figcaption>Personalization needed an escape hatch. The full catalog stays one click away and carries the same status vocabulary, so a member whose recommendation missed their intent can still browse everything.</figcaption>
+        </figure>
       </section>
 
       <section class="case-section">
-        <h2>Outcomes &amp; impact</h2>
-        <p>The experience shipped as a core personalization capability across the app and guide ecosystem, and became the foundation additional care paths were built on.</p>
+        <h2>A topic, broken into situations</h2>
+        <figure class="case-figure">
+          <img src="images/care-pathways/05-care-path-page.png"
+               alt="The Diabetes care path page, headed “Diabetes — 3 guides found”, with an active Diabetes filter chip alongside the status filters. Three guide cards are shown: Managing your blood sugar, marked Suggested for you; Just diagnosed with diabetes, marked In progress; and Diabetes and your eyes."
+               width="1440" height="948" loading="lazy" decoding="async">
+          <figcaption>One topic resolves into the specific situations inside it. “Just diagnosed” and “managing it for years” are different problems, and the care path page is where that distinction gets made.</figcaption>
+        </figure>
+      </section>
+
+      <section class="case-section">
+        <h2>Every step ends in one clear action</h2>
+        <figure class="case-figure">
+          <img src="images/care-pathways/06-guide-detail-step-sheet.png"
+               alt="The guide detail page for “Just diagnosed with diabetes” on desktop. An introduction panel explains the guide breaks things into six clear steps, with “Start your first step” and “Save for later” buttons. Below, “Your steps” lists six rows — Know your numbers, Talk to a dietitian, Join a diabetes class, Check your feet every day, Get your eyes checked, and Find a diabetes specialist — each with a status icon, a time estimate and a type such as Education, Appointment or Daily habit. A sidebar shows an “About this topic” summary and three related guides."
+               width="1440" height="1002" loading="lazy" decoding="async">
+          <figcaption>A diagnosis becomes six steps, each one a single concrete action with a time estimate attached — fifteen minutes, an appointment, a daily habit — so the next move is always visible and always small.</figcaption>
+        </figure>
+        <figure class="case-figure-full">
+          <img src="images/care-pathways/06a-guide-detail-side-sheet.png"
+               alt="The same guide detail page with a side sheet open for the step “Talk to a dietitian”. The sheet explains in plain language what a dietitian does, carries a video placeholder and a “What to do next” list of two links, and ends in a “Mark as done” button beside a disabled control reading “Returns Dec 19, 2026”. The matching row in the steps list behind it is highlighted."
+               width="1440" height="1048" loading="lazy" decoding="async">
+          <figcaption>The centre of the experience. Opening a step never navigates away — the sheet explains the step in plain language, then ends in one action. The list stays visible behind it, so a member never loses their place in the journey.</figcaption>
+        </figure>
+      </section>
+
+      <section class="case-section">
+        <h2>Progress without pressure</h2>
+        <figure class="case-figure">
+          <img src="images/care-pathways/07-status-system.png"
+               alt="Three step sheets side by side showing the status states. The first, not started, ends in “Mark as done” and “Skip for now” buttons. The second is completed and shows a disabled “Completed” control. The third was skipped and shows “Mark as done” beside a disabled control reading “Returns Dec 19, 2026”. Each sheet contains plain-language explanation, a video placeholder and a “What to do next” list of links."
+               width="1454" height="922" loading="lazy" decoding="async">
+          <figcaption>Done, skipped, and not started are all legitimate states. Skipping is not a failure and not permanent — a skipped step returns after 90 days rather than disappearing or nagging.</figcaption>
+        </figure>
+        <p>Health journeys are not linear, so the system had to be structured and forgiving at once: enough structure to reduce uncertainty, enough flexibility that it responds to someone's situation instead of behaving like a checklist they are failing.</p>
+      </section>
+
+      <section class="case-section">
+        <h2>Accessibility reshaped the filters</h2>
+        <figure class="case-figure">
+          <img src="images/care-pathways/08a-filters-before.png"
+               alt="A before-and-after pair of mobile filter screens. The before screen, drawn with a dashed border and labelled “Reconstructed”, shows filter chips crowded among search, sort and icon-only controls. The after screen shows a dedicated full-screen filter sheet with a “Filter” header, a Reset link, a Filters selected summary, labelled Sort by, Category and Status groups using radio buttons and checkboxes, and a persistent “Show results (12)” button above Cancel."
+               width="808" height="905" loading="lazy" decoding="async">
+          <figcaption>Before and after. A legend in the image marks which parts were reconstructed from testing evidence and which are directly evidenced.</figcaption>
+        </figure>
+        <p>Testing found that filtering worked but the controls competed with other actions and lacked a clear interaction hierarchy, and that the mobile popover pattern was difficult to use with a screen reader. The rework gave every control a visible, persistent label, made selected states unambiguous through checkboxes and chips, and replaced ambiguous dismissal with dedicated header actions and one persistent apply button.</p>
+      </section>
+
+      <section class="case-section">
+        <h2>The model scales to home</h2>
+        <figure class="case-figure">
+          <img src="images/care-pathways/09-home-dashboard.png"
+               alt="A personalized home dashboard. A greeting summarizes one open action from the care team. “Your next steps” shows five cards labelled Next step, Suggested guide, Covered program and Employer benefit, each naming where it came from. “Pick up where you left off” lists three guides with fraction progress indicators. A “Your coverage” sidebar summarizes medical, dental and vision plans, and a closing banner invites the member to explore care paths."
+               width="1440" height="1579" loading="lazy" decoding="async">
+          <figcaption>Once steps are structured, the home screen can assemble them. Each card states its own provenance — a next step in a guide, a covered program, an employer benefit — so a personalized surface stays legible rather than arbitrary.</figcaption>
+        </figure>
+      </section>
+
+      <section class="case-section">
+        <h2>Same path, both sides of the conversation</h2>
+        <figure class="case-figure">
+          <img src="images/care-pathways/10-advocate-continuity.png"
+               alt="A three-column diagram. The left column, Member, lists digital self-service entry points and member actions such as follow CTA, skip activity and mark complete. The centre column, Shared Care Path, shows the care path, journey and activity structure with status values not started, in progress, completed and skipped, shared content types, and recommendations. The right column, Care Advocate, lists an assisted workflow — open the member's care path, see its status, view the same content, continue the conversation — and advocate actions including completing an activity on behalf of the member. Arrows between the columns are labelled digital and assisted continuity."
+               width="1200" height="807" loading="lazy" decoding="async">
+          <figcaption>Members and care advocates read the same structure and the same activity state, so a phone conversation picks up where the app left off instead of starting over. Interfaces and permissions stay role-specific.</figcaption>
+        </figure>
+      </section>
+
+      <section class="case-section">
+        <h2>Impact</h2>
         <ul class="outcome-list">
-          <li>16.0% reduction in repeat calls<span>Measured against the guide and app support experience</span></li>
+          <li>16% reduction in repeat calls<span>Measured against the guide and app support experience</span></li>
           <li>10.5% increase in accepted personalized offers<span>Members acting on recommended programs and offers</span></li>
-          <li>30+ care paths<span>Spanning benefits, family support, financial, health conditions, mental health, and staying healthy</span></li>
         </ul>
-        <p>Beyond the numbers: members got clearer next steps during genuinely stressful moments and could move at their own pace across devices, and care advocates gained a consistent structure to guide conversations — reducing the one-off navigation help that had been absorbing support time.</p>
+        <h3>What I'd measure next</h3>
+        <ul class="case-list">
+          <li>Journey starts — how often a member commits to a path at all</li>
+          <li>Completion — how far through a journey people actually get</li>
+          <li>Skips and returns — whether the 90-day return brings people back, or whether a skip is effectively an exit</li>
+          <li>Handoffs to a person — when the guided path stops being enough and a conversation has to take over</li>
+        </ul>
       </section>
 
       <section class="case-section">
-        <h2>Learnings &amp; reflections</h2>
-        <p>The hardest problem was designing for nonlinear journeys while still giving people a sense of progress. What the team learned is that guidance has to be structured <em>and</em> forgiving — enough structure to reduce uncertainty, enough flexibility that it responds to someone's situation instead of behaving like a checklist they're failing. The core shift was from "find content" to "understand what to do next."</p>
-        <p>What I'd do differently: set up a formal experiment framework earlier, define success measures at the activity, journey, and pathway levels <em>before</em> launch rather than after, and instrument completion, skip, revisit, and handoff behaviour properly. We had directional program metrics but thinner data than I wanted on how individual journeys performed — which is exactly the data that would have sharpened the next round of design decisions.</p>
+        <h2>Reflection</h2>
+        <p>The hardest problem was designing for nonlinear journeys while still giving people a sense of progress. Too much structure and the experience becomes a checklist someone is failing; too little and it collapses back into the library we were replacing. What resolved it was treating skipping as a first-class state rather than an error — the system keeps its shape, and the member keeps their pace.</p>
+        <p>What I'd do differently: set up a formal experiment framework earlier, and define success measures at the activity, journey, and pathway levels <em>before</em> launch rather than after. We had directional program metrics but thinner data than I wanted on how individual journeys performed — which is exactly the data that would have sharpened the next round of design decisions.</p>
       </section>
+
     </div>
 </template>
 
@@ -562,15 +635,19 @@
           <li><strong>Human accountability by design.</strong> Provider outreach, push to contract, duplicate handling, and status transitions all preserve review, confirmation, and audit trails.</li>
         </ul>
 
-        <figure class="case-figure-wide">
-          <!-- TODO: drop the service blueprint export at images/onboardiq/service-blueprint.png
-               and update width/height below to the file's real intrinsic pixel
-               dimensions. Until the file exists this <img> will 404. -->
-          <img src="images/onboardiq/service-blueprint.png"
-               alt="Service blueprint in four stages — intake, parallel contracting and credentialing preparation, convergence review, then activation and status update. AI prepares evidence at each stage, and human decision gates sit before activation and before any provider-facing communication."
-               width="1600" height="900" loading="lazy" decoding="async">
-          <figcaption>Portfolio-safe service blueprint showing how one intake record becomes role-specific work, with AI preparation and human decision gates before activation and status updates.</figcaption>
-        </figure>
+        <!-- HIDDEN: the service blueprint is still being worked on. The export
+             does not exist yet at images/onboardiq/service-blueprint.png, so this
+             figure is commented out rather than left to 404. To restore it: drop
+             the file in, uncomment the block below, and set width/height to the
+             file's real intrinsic pixel dimensions.
+
+             <figure class="case-figure-wide">
+               <img src="images/onboardiq/service-blueprint.png"
+                    alt="Service blueprint in four stages: intake, parallel contracting and credentialing preparation, convergence review, then activation and status update. AI prepares evidence at each stage, and human decision gates sit before activation and before any provider-facing communication."
+                    width="1600" height="900" loading="lazy" decoding="async">
+               <figcaption>Portfolio-safe service blueprint showing how one intake record becomes role-specific work, with AI preparation and human decision gates before activation and status updates.</figcaption>
+             </figure>
+        -->
       </section>
 
       <section class="case-section">
