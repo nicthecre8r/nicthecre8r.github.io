@@ -18,27 +18,10 @@ images/         Hero portrait at five widths (360–1000px)
 
 ## Deploy to GitHub Pages
 
-### Option A — upload through the browser (no command line)
+Deployment is automated. `.github/workflows/deploy.yml` publishes the site on
+every push to `main`, and stamps the footer date as it goes.
 
-1. Create a new repository on GitHub. To publish at
-   `https://<username>.github.io`, name it exactly `<username>.github.io`.
-   Any other name publishes to `https://<username>.github.io/<repo-name>/`.
-2. On the empty repo page choose **uploading an existing file**.
-3. Drag in **the contents of this folder** — `index.html`, `work.html`,
-   `ask.html`, `404.html`, `styles.css`, `script.js`, and the `images` folder.
-   Drag the *files*, not the enclosing folder, so `index.html` sits at the
-   repository root.
-4. Commit.
-5. Go to **Settings → Pages**. Under *Build and deployment*, set **Source** to
-   *Deploy from a branch*, branch `main`, folder `/ (root)`. Save.
-6. Wait about a minute, then load the URL Pages shows you.
-
-> `.nojekyll` and `.gitignore` start with a dot, so the browser uploader and
-> macOS Finder both hide them. The site works without either — `.nojekyll`
-> only matters if you later add folders whose names start with an underscore.
-> To include them, use Option B.
-
-### Option B — command line
+### First-time setup
 
 ```bash
 cd path/to/this/folder
@@ -49,9 +32,44 @@ git remote add origin https://github.com/<username>/<repo-name>.git
 git push -u origin main
 ```
 
-Then enable Pages under **Settings → Pages** as in step 5 above.
+To publish at `https://<username>.github.io`, name the repository exactly
+`<username>.github.io`. Any other name publishes to
+`https://<username>.github.io/<repo-name>/`.
 
-To update after that: edit, then `git add -A && git commit -m "..." && git push`.
+Then, **once**, in **Settings → Pages → Build and deployment**, set **Source**
+to **GitHub Actions**. This is required. With the default *Deploy from a
+branch* setting the workflow still runs, but Pages ignores what it produces
+and serves the raw branch instead — which means an unstamped footer.
+
+Watch the first run under the repository's **Actions** tab.
+
+### Updating after that
+
+```bash
+git add -A && git commit -m "..." && git push
+```
+
+That is the whole process. The workflow rebuilds and redeploys.
+
+> Do not upload through the browser's file picker. It hides dotfiles, so
+> `.nojekyll` and the entire `.github` folder — the workflow itself — would be
+> silently dropped.
+
+### The footer date
+
+The four HTML files carry the literal placeholder `Updated [MONTH YEAR]`.
+Leave it alone. `.github/scripts/stamp-date.py` replaces it with the current
+month and year in the runner's checkout during deploy, so the published site
+shows the real deploy date while the repository keeps the placeholder. No
+commit is ever pushed back.
+
+If the footer markup ever changes, update `PLACEHOLDER` in that script to
+match. It exits non-zero when it finds nothing to replace, so the deploy fails
+loudly rather than quietly publishing an unstamped footer.
+
+The date uses the `America/New_York` timezone, set in the workflow, because
+runners are UTC and that would show the wrong month for a day at each month
+boundary. Change `TZ:` in `.github/workflows/deploy.yml` if that ever moves.
 
 ### Custom domain
 
@@ -110,11 +128,15 @@ Anything published to a public GitHub repo is public — including files you
 never link to, and including anything in the repo's history even after you
 delete it. These were left out on purpose:
 
-- Internal research decks stamped **© 2024 Optum. All Rights Reserved.**
+- Internal research decks carrying a former employer's copyright notice
 - Source case-study PDFs and raw project exports (`ux_project/`)
 - Design mockup screenshots (`portfolio_examples/`)
-- Your résumé PDF and portrait source files (`assets/`)
+- Portrait and logo source files (`assets/`) — everything there except the
+  linked résumé, which has to ship
 - Local tooling config (`.claude/`)
+- Hand-built deploy bundles (`portfolio-site-*/`) — the workflow replaced
+  them, and committing one would republish a stale copy of the whole site
+  under its own folder
 
 The included `.gitignore` re-excludes these patterns as a backstop. Keep the
 source material outside this folder rather than relying on it.
