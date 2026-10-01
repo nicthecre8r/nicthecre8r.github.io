@@ -336,6 +336,42 @@ a { color: var(--color-navy); text-decoration-color: var(--color-teal); text-dec
 .case-stats b { display: block; font-size: var(--size-h2); line-height: 1.1; color: var(--color-navy); }
 .case-stats span { display: block; margin-top: var(--space-1); font-size: var(--size-small); color: var(--color-muted); }
 
+/* --- Image lightbox -----------------------------------------------------
+   Case-study screenshots are 1440px wide but render inside a 68ch column.
+   script.js wraps each one in a button at runtime and opens it in a native
+   <dialog>, which gives focus trapping, Escape-to-close and inertness for
+   free. The image opens at its own width and the dialog scrolls, rather
+   than being fitted to the viewport — these are tall UI screenshots, so
+   width is what carries the detail and vertical scrolling is expected.
+   Progressive enhancement: with JS off the figures render as plain images. */
+.case-zoom { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; border-radius: var(--radius); }
+.case-zoom img { display: block; }
+.case-zoom:hover img { opacity: 0.92; }
+
+.lightbox { width: 100%; max-width: 100%; max-height: 100%; height: 100%; margin: 0; padding: 0; border: 0; background: var(--color-surface); overscroll-behavior: contain; }
+.lightbox::backdrop { background: var(--color-navy); opacity: 0.92; }
+
+.lightbox__bar { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); padding: var(--space-3) var(--pad-inline); background: var(--color-surface); border-bottom: 1px solid var(--color-bg-muted); }
+/* The caption is orientation, not reading matter — the page below already
+   carries it in full. Single line, and suppressed on phones where the two
+   controls need the whole bar. */
+.lightbox__caption { display: none; margin: 0; font-size: var(--size-small); color: var(--color-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lightbox__zoom { flex: none; min-height: var(--btn-h-md); padding: 0 var(--space-3); font-family: inherit; font-size: var(--size-btn); font-weight: 600; color: var(--color-navy); background: none; border: 1px solid var(--color-navy); border-radius: var(--radius-btn); cursor: pointer; }
+.lightbox__zoom:hover { color: var(--color-inverse); background: var(--color-navy); }
+.lightbox__caption { flex: 1 1 auto; min-width: 0; }
+.lightbox__close { flex: none; display: inline-flex; align-items: center; gap: var(--space-2); min-height: var(--btn-h-md); padding: 0 var(--space-3); font-family: inherit; font-size: var(--size-btn); font-weight: 600; color: var(--color-navy); background: none; border: 1px solid var(--color-navy); border-radius: var(--radius-btn); cursor: pointer; }
+.lightbox__close:hover { color: var(--color-inverse); background: var(--color-navy); }
+.lightbox__close svg { width: 1em; height: 1em; }
+
+.lightbox__scroll { overflow: auto; height: calc(100% - var(--space-8)); padding: var(--space-4) var(--pad-inline) var(--space-8); background: var(--color-bg); }
+
+/* Two viewing modes. Fit-to-width is the default and never scrolls
+   sideways. Actual size lets a 1440px screenshot render at 1440px so the
+   UI text inside it is legible, and the container pans. */
+.lightbox__img { display: block; margin: 0 auto; max-width: 100%; height: auto; border-radius: var(--radius); background: var(--color-bg-muted); cursor: zoom-in; }
+.lightbox.is-actual-size .lightbox__scroll { text-align: center; }
+.lightbox.is-actual-size .lightbox__img { max-width: none; cursor: zoom-out; }
+
 /* --- Data table ------------------------------------------------------------
    The wrapper scrolls on narrow screens so a wide table never forces the page
    to scroll sideways. Hairline rules are 1px, matching the border convention
@@ -403,6 +439,7 @@ a { color: var(--color-navy); text-decoration-color: var(--color-teal); text-dec
 }
 
 @media (min-width: 640px) {
+  .lightbox__caption { display: block; }
   .case-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .discipline { grid-column: span 4; }
   .facts-grid > div { grid-column: span 6; }
