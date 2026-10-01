@@ -5,9 +5,10 @@
    that don't have (e.g.) the case-study system or the work filter.
      1. Mobile nav toggle
      2. Work filter (UX Design / Experiments) — work.html
-     3. Case study pages — work.html
-     4. Scroll reveal
-     5. Copy email button
+     3. Image lightbox — work.html
+     4. Case study pages — work.html
+     5. Scroll reveal
+     6. Copy email button
    No libraries, no build step.
    ========================================================================== */
 
@@ -58,7 +59,132 @@
   }
 
   /* ------------------------------------------------------------------
-     3. CASE STUDY PAGES (work.html only)
+     3. IMAGE LIGHTBOX (work.html only)
+     Case-study screenshots are up to 1440px wide but render inside a 68ch
+     column, so detail is lost. Each figure image is wrapped in a button at
+     runtime and opens in a native <dialog>, which supplies focus trapping,
+     Escape-to-close, inertness and focus restoration without us writing it.
+     Progressive enhancement: with JS off the figures stay plain images.
+     Runs after each case renders, because case content is injected from a
+     <template> rather than present at load.
+     ------------------------------------------------------------------ */
+  var lightbox = null;
+  var lightboxImg = null;
+  var lightboxCaption = null;
+
+  var supportsDialog = typeof HTMLDialogElement === 'function' &&
+                       typeof document.createElement('dialog').showModal === 'function';
+
+  var buildLightbox = function () {
+    if (lightbox || !supportsDialog) return lightbox;
+
+    lightbox = document.createElement('dialog');
+    lightbox.className = 'lightbox';
+    lightbox.innerHTML =
+      '<div class="lightbox__bar">' +
+        '<p class="lightbox__caption"></p>' +
+        '<button class="lightbox__zoom" type="button" aria-pressed="false">Actual size</button>' +
+        '<button class="lightbox__close" type="button">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
+          'stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>' +
+          'Close' +
+        '</button>' +
+      '</div>' +
+      '<div class="lightbox__scroll"><img class="lightbox__img" alt=""></div>';
+
+    lightboxImg = lightbox.querySelector('.lightbox__img');
+    lightboxCaption = lightbox.querySelector('.lightbox__caption');
+
+    lightbox.querySelector('.lightbox__close').addEventListener('click', function () {
+      lightbox.close();
+    });
+
+    // Fit-to-width vs. actual size. Only offered when the image is actually
+    // bigger than the space available, so the control never lies.
+    var zoomBtn = lightbox.querySelector('.lightbox__zoom');
+    var setZoom = function (actual) {
+      lightbox.classList.toggle('is-actual-size', actual);
+      zoomBtn.setAttribute('aria-pressed', String(actual));
+      zoomBtn.textContent = actual ? 'Fit to width' : 'Actual size';
+    };
+    zoomBtn.addEventListener('click', function () {
+      setZoom(!lightbox.classList.contains('is-actual-size'));
+    });
+    lightboxImg.addEventListener('click', function () {
+      if (!zoomBtn.hidden) setZoom(!lightbox.classList.contains('is-actual-size'));
+    });
+    lightbox._setZoom = setZoom;
+    lightbox._zoomBtn = zoomBtn;
+
+    // Clicking the surround closes; clicking the image itself does not.
+    lightbox.addEventListener('click', function (e) {
+      if (e.target === lightbox || e.target.classList.contains('lightbox__scroll')) {
+        lightbox.close();
+      }
+    });
+
+    // Release the body scroll lock however the dialog was dismissed,
+    // including the browser's own Escape handling.
+    lightbox.addEventListener('close', function () {
+      document.body.style.overflow = '';
+    });
+
+    document.body.appendChild(lightbox);
+    return lightbox;
+  };
+
+  var openLightbox = function (img, caption) {
+    if (!buildLightbox()) return;
+    lightboxImg.src = img.currentSrc || img.src;
+    lightboxImg.alt = img.alt || '';
+    lightboxCaption.textContent = caption || '';
+    var scroller = lightbox.querySelector('.lightbox__scroll');
+    scroller.scrollTop = 0;
+    scroller.scrollLeft = 0;
+    lightbox._setZoom(false);
+    document.body.style.overflow = 'hidden';
+    lightbox.showModal();
+
+    // Decide after layout whether actual size would show anything more.
+    var decideZoomAffordance = function () {
+      var room = scroller.clientWidth;
+      lightbox._zoomBtn.hidden = !(lightboxImg.naturalWidth > room + 1);
+    };
+    if (lightboxImg.complete) decideZoomAffordance();
+    else lightboxImg.addEventListener('load', decideZoomAffordance, { once: true });
+  };
+
+  var lightboxIsOpen = function () {
+    return !!(lightbox && lightbox.open);
+  };
+
+  var enhanceFigures = function (root) {
+    if (!supportsDialog || !root) return;
+
+    root.querySelectorAll('.case-figure img, .case-figure-full img').forEach(function (img) {
+      if (img.parentNode.classList.contains('case-zoom')) return;
+
+      var figure = img.closest('figure');
+      var caption = figure && figure.querySelector('figcaption');
+      var captionText = caption ? caption.textContent.trim() : '';
+
+      var button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'case-zoom';
+      // The alt text already describes the image; this says what the control does.
+      button.setAttribute('aria-label', 'Open larger view' + (captionText ? ': ' + captionText : ''));
+
+      img.parentNode.insertBefore(button, img);
+      button.appendChild(img);
+
+      button.addEventListener('click', function () {
+        openLightbox(img, captionText);
+      });
+    });
+  };
+
+  /* ------------------------------------------------------------------
+     4. CASE STUDY PAGES (work.html only)
      Clicking a project's Open / View case study control swaps the whole
      page for a dedicated case-study view (main is hidden, not overlaid)
      and pushes a "#case/<slug>" URL so both the on-page back link and the
@@ -77,7 +203,9 @@
     var lastFocused = null;
 
     var onCasePageKeydown = function (e) {
-      if (e.key === 'Escape') closeCasePage();
+      // The dialog handles its own Escape; without this guard a single
+      // press would close the lightbox and the case page together.
+      if (e.key === 'Escape' && !lightboxIsOpen()) closeCasePage();
     };
 
     var findArticleBySlug = function (slug) {
@@ -115,6 +243,10 @@
       }
 
       document.title = document.getElementById('modal-title').textContent + ' — Nicholas Gray';
+
+      // Case content is injected above, so the zoom controls have to be
+      // attached now rather than at load.
+      enhanceFigures(modalContentSlot);
     };
 
     var openCasePage = function (article, trigger, pushHistory) {
@@ -184,7 +316,7 @@
   }
 
   /* ------------------------------------------------------------------
-     4. SCROLL REVEAL
+     5. SCROLL REVEAL
      Fades elements in as they enter the viewport.
      ------------------------------------------------------------------ */
   var revealItems = document.querySelectorAll('.reveal');
@@ -205,7 +337,7 @@
   }
 
   /* ------------------------------------------------------------------
-     5. COPY EMAIL
+     6. COPY EMAIL
      Works on any <button data-copy="you@email.com">. The label changes
      to "Copied" for two seconds, then reverts.
      ------------------------------------------------------------------ */
